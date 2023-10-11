@@ -31,18 +31,26 @@
 
 <body>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
     <h1>WebSocket Client</h1>
     <button id="connectButton">Connect</button>
     <button id="stopButton">Stop</button>
     <br><br>
     <div style="display: flex; align-items: flex-end;">
-        <div id="barGraph" style="width: 50px; height: 300px; background-color: lightgray; position: relative; border-radius: 10px 10px 10px 10px; box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.2);">
-            <div id="bar" style="width: 100%; height: 0%; background-color: blue; position: absolute; bottom: 0; border-radius: 10px 10px 10px 10px;">
+        <div id="barGraph"
+            style="width: 50px; height: 300px; background-color: lightgray; position: relative; border-radius: 10px 10px 10px 10px; box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.2);">
+            <div id="bar"
+                style="width: 100%; height: 0%; background-color: blue; position: absolute; bottom: 0; border-radius: 10px 10px 10px 10px;">
             </div>
         </div>
-        
+
         <span id="latestDBA" style="margin-left: 10px;"></span>
     </div>
+
+    <canvas id="lineGraph" width="400" height="200"></canvas>
+
 
     <div id="data-container">
         <table id="dataTable">
@@ -60,6 +68,34 @@
 
     <script>
         var ws;
+
+        // Initialize variables for the line graph
+        let lineGraphCtx = document.getElementById('lineGraph').getContext('2d');
+        let lineGraphData = {
+            labels: [],  // X-axis labels (timestamps)
+            datasets: [{
+                label: 'Sound Level (dBA)',
+                data: [],  // Y-axis data points (dBA values)
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                fill: false
+            }]
+        };
+        let lineGraphConfig = {
+            type: 'line',
+            data: lineGraphData,
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom'
+                    }
+                }
+            }
+        };
+        let lineGraph = new Chart(lineGraphCtx, lineGraphConfig);
+
+
         document.getElementById('connectButton').addEventListener('click', () => {
             ws = new WebSocket('ws://localhost:8080');
 
@@ -117,14 +153,41 @@
                 } else if (data.dBA > 68) {
                     bar.style.backgroundColor = 'orange';
                 } else {
-                    bar.style.backgroundColor = 'hotpink';
+                    bar.style.backgroundColor = 'green';
                 }
 
                 // Update the latest dBA value display
                 document.getElementById('latestDBA').innerText = `Latest dBA: ${data.dBA}`;
 
+                // Update the line graph
+                // if (lineGraphData.labels.length > 60) {  // keep only the last 60 data points
+                //     lineGraphData.labels.shift();
+                //     lineGraphData.datasets[0].data.shift();
+                // }
+                //const unixTimestamp = convertToUnixTimestamp(data.timestamp);
+                //lineGraphData.labels.push(unixTimestamp);
+                lineGraphData.labels.push(counter++)
+                lineGraphData.datasets[0].data.push(data.dBA);
+                lineGraph.update();
+
 
             });
+
+            var counter = 0;
+
+            function convertToUnixTimestamp(str) {
+                // Extracting date and time from the string
+                const [date, time] = str.split(' ');
+                const [year, month, day] = date.split('-').map(Number);
+                const [hour, minute, second] = time.split(':').map(Number);
+
+                // Creating a Date object
+                const dateObj = new Date(year, month - 1, day, hour, minute, second);
+
+                // Returning the Unix timestamp (in seconds)
+                return dateObj.getTime();
+            }
+
 
 
 
