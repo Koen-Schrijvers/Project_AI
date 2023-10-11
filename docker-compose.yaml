@@ -15,6 +15,13 @@ services:
     networks:
       - my_network
 
+  mock-api:
+    build: ./mock-api
+    ports:
+      - "8080:8080"
+    networks:
+      - my_network
+
 networks:
   my_network:
     driver: bridge

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Client</title>
+    <style>
+        #data-container {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<h1>WebSocket Client</h1>
+<button id="connectButton">Connect</button>
+<button id="stopButton">Stop</button>
+<div id="data-container">
+    <table id="dataTable">
+        <thead>
+            <!-- Table header will be populated dynamically -->
+        </thead>
+        <tbody>
+            <!-- Table data will be populated dynamically -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    var ws;
+document.getElementById('connectButton').addEventListener('click', () => {
+    ws = new WebSocket('ws://localhost:8080');
+
+    ws.addEventListener('open', () => {
+        console.log('Connected to server');
+        ws.send('Hello, server!');
+    });
+
+    ws.addEventListener('message', (event) => {
+    console.log(`Received message: ${event.data}`);
+
+    const data = JSON.parse(event.data);
+    
+    if (!data) return;
+    
+    const dataTable = document.getElementById('dataTable');
+    
+    // Populate table header dynamically
+    if (dataTable.tHead.rows.length === 0) {
+        const thead = dataTable.createTHead();
+        const row = thead.insertRow();
+        
+        // Only creating headers for "timestamp" and "dBA"
+        ["timestamp", "dBA"].forEach(key => {
+            const th = document.createElement("th");
+            const text = document.createTextNode(key);
+            th.appendChild(text);
+            row.appendChild(th);
+        });
+    }
+    
+    // Append received data to the table
+    const row = dataTable.insertRow();
+    
+    // Only appending data for "timestamp" and "dBA"
+    ["timestamp", "dBA"].forEach(key => {
+        const cell = row.insertCell();
+        const text = document.createTextNode(data[key]);
+        cell.appendChild(text);
+    });
+});
+
+
+    ws.addEventListener('close', () => {
+        console.log('Disconnected from server');
+    });
+
+    ws.addEventListener('error', (error) => {
+        console.log('An error occurred:', error);
+    });
+});
+
+document.getElementById('stopButton').addEventListener('click', () => {
+    if(ws){
+        ws.close();
+    }
+});
+</script>
+
+</body>
+</html>

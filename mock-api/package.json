@@ -1,0 +1,17 @@
+{
+  "name": "mock-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv": "^6.3.5",
+    "fs": "^0.0.1-security",
+    "papaparse": "^5.4.1",
+    "ws": "^8.14.2"
+  }
+}
