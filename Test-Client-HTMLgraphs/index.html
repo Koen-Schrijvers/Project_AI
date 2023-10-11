@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Client</title>
+    <style>
+        #data-container {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>WebSocket Client</h1>
+    <button id="connectButton">Connect</button>
+    <button id="stopButton">Stop</button>
+    <br><br>
+    <div style="display: flex; align-items: flex-end;">
+        <div id="barGraph" style="width: 50px; height: 300px; background-color: lightgray; position: relative; border-radius: 10px 10px 10px 10px; box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.2);">
+            <div id="bar" style="width: 100%; height: 0%; background-color: blue; position: absolute; bottom: 0; border-radius: 10px 10px 10px 10px;">
+            </div>
+        </div>
+        
+        <span id="latestDBA" style="margin-left: 10px;"></span>
+    </div>
+
+    <div id="data-container">
+        <table id="dataTable">
+            <thead>
+                <!-- Table header will be populated dynamically -->
+            </thead>
+            <tbody>
+                <!-- Table data will be populated dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+    <script>
+        var ws;
+        document.getElementById('connectButton').addEventListener('click', () => {
+            ws = new WebSocket('ws://localhost:8080');
+
+            ws.addEventListener('open', () => {
+                console.log('Connected to server');
+                ws.send('Hello, server!');
+            });
+
+            ws.addEventListener('message', (event) => {
+                console.log(`Received message: ${event.data}`);
+
+                const data = JSON.parse(event.data);
+
+                if (!data) return;
+
+                const dataTable = document.getElementById('dataTable');
+
+                // Populate table header dynamically
+                if (dataTable.tHead.rows.length === 0) {
+                    const thead = dataTable.createTHead();
+                    const row = thead.insertRow();
+
+                    ["timestamp", "dBA"].forEach(key => {
+                        const th = document.createElement("th");
+                        const text = document.createTextNode(key);
+                        th.appendChild(text);
+                        row.appendChild(th);
+                    });
+                }
+
+                // Append received data to the table
+                const row = dataTable.insertRow();
+
+                ["timestamp", "dBA"].forEach(key => {
+                    const cell = row.insertCell();
+                    const text = document.createTextNode(data[key]);
+                    cell.appendChild(text);
+                });
+
+                // Update the bar graph
+                const bar = document.getElementById('bar');
+                const maxGraphHeight = 300; // match the height of #barGraph in CSS
+
+                const minDBA = 40;
+                const maxDBA = 80;
+                let normalizedDBA = (data.dBA - minDBA) / (maxDBA - minDBA);
+                if (normalizedDBA < 0) normalizedDBA = 0;
+                if (normalizedDBA > 1) normalizedDBA = 1;
+
+                bar.style.height = `${normalizedDBA * 100}%`;
+
+                // Update the color based on the dBA value
+                if (data.dBA > 75) {
+                    bar.style.backgroundColor = 'red';
+                } else if (data.dBA > 68) {
+                    bar.style.backgroundColor = 'orange';
+                } else {
+                    bar.style.backgroundColor = 'hotpink';
+                }
+
+                // Update the latest dBA value display
+                document.getElementById('latestDBA').innerText = `Latest dBA: ${data.dBA}`;
+
+
+            });
+
+
+
+
+            ws.addEventListener('close', () => {
+                console.log('Disconnected from server');
+            });
+
+            ws.addEventListener('error', (error) => {
+                console.log('An error occurred:', error);
+            });
+        });
+
+        document.getElementById('stopButton').addEventListener('click', () => {
+            console.log('Stopping the client');
+            if (ws) {
+                ws.close();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
