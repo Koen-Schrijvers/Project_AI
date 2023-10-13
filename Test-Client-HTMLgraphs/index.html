@@ -26,6 +26,18 @@
             padding: 8px;
             text-align: left;
         }
+        .containerDiv{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-style: groove;
+            border-width: 5px;
+
+        }
     </style>
 </head>
 
@@ -34,22 +46,28 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-    <h1>WebSocket Client</h1>
+    <h1>Dashboard Geluidssensor</h1>
     <button id="connectButton">Connect</button>
     <button id="stopButton">Stop</button>
     <br><br>
-    <div style="display: flex; align-items: flex-end;">
-        <div id="barGraph"
-            style="width: 50px; height: 300px; background-color: lightgray; position: relative; border-radius: 10px 10px 10px 10px; box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.2);">
-            <div id="bar"
-                style="width: 100%; height: 0%; background-color: blue; position: absolute; bottom: 0; border-radius: 10px 10px 10px 10px;">
+
+    <div class="containerDiv">
+
+
+        <div style="display: flex; align-items: flex-end;">
+            <div id="barGraph"
+                style="width: 50px; height: 300px; background-color: lightgray; position: relative; border-radius: 10px 10px 10px 10px; box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.2);">
+                <div id="bar"
+                    style="width: 100%; height: 0%; background-color: blue; position: absolute; bottom: 0; border-radius: 10px 10px 10px 10px;">
+                </div>
             </div>
+
+            <span id="latestDBA" style="margin-left: 10px; margin-bottom: 15%;"></span>
         </div>
 
-        <span id="latestDBA" style="margin-left: 10px;"></span>
-    </div>
+        <canvas id="lineGraph" width="200" height="100"></canvas>
 
-    <canvas id="lineGraph" width="400" height="200"></canvas>
+    </div>
 
 
     <div id="data-container">
