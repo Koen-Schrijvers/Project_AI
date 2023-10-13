@@ -26,7 +26,8 @@
             padding: 8px;
             text-align: left;
         }
-        .containerDiv{
+
+        .containerDiv {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-gap: 20px;
@@ -37,6 +38,75 @@
             border-style: groove;
             border-width: 5px;
 
+        }
+
+        body {
+            background-color: black;
+            color: limegreen;
+            font-family: 'Courier New', monospace;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            perspective: 600px;
+            margin: 50px 0;
+            position: relative;
+        }
+
+        th,
+        td {
+            border: 1px solid limegreen;
+            padding: 8px;
+            text-align: left;
+            background-color: #001100;
+            position: relative;
+        }
+
+        th {
+            color: limegreen;
+        }
+
+        tr {
+            transform: rotateX(45deg);
+            transform-origin: 50% 50%;
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+
+        tr:hover {
+            transform: rotateX(0deg);
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.5);
+        }
+
+        tr:nth-child(even) td {
+            background-color: #002200;
+        }
+
+        td::before,
+        th::before {
+            content: "";
+            position: absolute;
+            background: linear-gradient(limegreen, limegreen 20%, transparent 0);
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 100%;
+            transform: translateX(-1px) rotateY(90deg);
+            transform-origin: 0% 50%;
+        }
+
+        td::after,
+        th::after {
+            content: "";
+            position: absolute;
+            background: linear-gradient(limegreen, limegreen 20%, transparent 0);
+            top: 0;
+            left: 0;
+            height: 1px;
+            width: 100%;
+            transform: translateY(-1px) rotateX(90deg);
+            transform-origin: 50% 0%;
         }
     </style>
 </head>
