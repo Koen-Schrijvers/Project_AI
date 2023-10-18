@@ -11,7 +11,7 @@ console.log("loading csv");
 Papa.parse(fs.createReadStream('./smaller_dataset.csv'), {
     header: true,
     dynamicTyping: true,
-    complete: function(results) {
+    complete: function (results) {
         csvData = results.data;
         console.log("csv loaded");
     }

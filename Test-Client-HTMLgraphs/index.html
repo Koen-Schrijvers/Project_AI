@@ -62,11 +62,10 @@
     <h1>Dashboard Geluidssensor</h1>
     <button id="connectButton">Connect</button>
     <button id="stopButton">Stop</button>
+    <a href="sound-record.html"><button>sound recorder pagina</button></a>
     <br><br>
 
     <div class="containerDiv">
-
-
         <div style="display: flex; align-items: flex-end;">
             <div id="barGraph"
                 style="width: 50px; height: 300px; background-color: lightgray; position: relative; border-radius: 10px 10px 10px 10px; box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.2);">
@@ -179,7 +178,7 @@
                 if (normalizedDBA < 0) normalizedDBA = 0;
                 if (normalizedDBA > 1) normalizedDBA = 1;
 
-                bar.style.height = `${300-(normalizedDBA * maxGraphHeight)}px`;
+                bar.style.height = `${300 - (normalizedDBA * maxGraphHeight)}px`;
 
 
                 // Update the latest dBA value display
@@ -232,7 +231,7 @@
             if (ws) {
                 ws.close();
             }
-        });
+        }); 
     </script>
 
 </body>
