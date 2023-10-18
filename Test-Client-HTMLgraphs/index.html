@@ -26,7 +26,8 @@
             padding: 8px;
             text-align: left;
         }
-        .containerDiv{
+
+        .containerDiv {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-gap: 20px;
@@ -37,6 +38,18 @@
             border-style: groove;
             border-width: 5px;
 
+        }
+
+        #barGraph {
+            background: linear-gradient(to top, green, orange, red);
+        }
+
+        #bar {
+            background-color: white;
+        }
+
+        .flipped {
+            transform: rotate(180deg);
         }
     </style>
 </head>
@@ -57,8 +70,8 @@
         <div style="display: flex; align-items: flex-end;">
             <div id="barGraph"
                 style="width: 50px; height: 300px; background-color: lightgray; position: relative; border-radius: 10px 10px 10px 10px; box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.2);">
-                <div id="bar"
-                    style="width: 100%; height: 0%; background-color: blue; position: absolute; bottom: 0; border-radius: 10px 10px 10px 10px;">
+                <div id="bar" class="flipped"
+                    style="width: 100%; height: 0%; background-color: white; position: absolute; bottom: 300; border-radius: -5px -5px 10px 10px;">
                 </div>
             </div>
 
@@ -148,6 +161,9 @@
 
                 const data = JSON.parse(event.data);
 
+                console.log("data:");
+                console.log(data);
+
                 if (!data) return;
 
                 const dataTable = document.getElementById('dataTable');
@@ -171,16 +187,8 @@
                 if (normalizedDBA < 0) normalizedDBA = 0;
                 if (normalizedDBA > 1) normalizedDBA = 1;
 
-                bar.style.height = `${normalizedDBA * 100}%`;
+                bar.style.height = `${300-(normalizedDBA * maxGraphHeight)}px`;
 
-                // Update the color based on the dBA value
-                if (data.dBA > 75) {
-                    bar.style.backgroundColor = 'red';
-                } else if (data.dBA > 68) {
-                    bar.style.backgroundColor = 'orange';
-                } else {
-                    bar.style.backgroundColor = 'green';
-                }
 
                 // Update the latest dBA value display
                 document.getElementById('latestDBA').innerText = `Latest dBA: ${data.dBA}`;
