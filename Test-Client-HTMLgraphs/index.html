@@ -66,20 +66,13 @@
         </div>
 
         <canvas id="lineGraph" width="200" height="100"></canvas>
-
+       
     </div>
 
-
-    <div id="data-container">
-        <table id="dataTable">
-            <thead>
-                <!-- Table header will be populated dynamically -->
-            </thead>
-            <tbody>
-                <!-- Table data will be populated dynamically -->
-            </tbody>
-        </table>
+    <div>
+        <canvas id="tertsBarChart"></canvas>
     </div>
+   
 
 
 
@@ -113,6 +106,34 @@
         };
         let lineGraph = new Chart(lineGraphCtx, lineGraphConfig);
 
+        // bar chart
+        let tertBarChartCtx = document.getElementById('tertsBarChart').getContext('2d');
+        let tertBarChartData = {
+            labels: [],  // X-axis labels for the "terts" values
+            datasets: [{
+                label: 'Terts Values',
+                data: [],  // Y-axis data points for the "terts" values
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+        let tertBarChartConfig = {
+            type: 'bar',
+            data: tertBarChartData,
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: false,
+                        min: 20
+                    }
+                }
+            }
+        };
+        let tertBarChart = new Chart(tertBarChartCtx, tertBarChartConfig);
 
         document.getElementById('connectButton').addEventListener('click', () => {
             ws = new WebSocket('ws://localhost:8080');
@@ -131,27 +152,14 @@
 
                 const dataTable = document.getElementById('dataTable');
 
-                // Populate table header dynamically
-                if (dataTable.tHead.rows.length === 0) {
-                    const thead = dataTable.createTHead();
-                    const row = thead.insertRow();
-
-                    ["timestamp", "dBA"].forEach(key => {
-                        const th = document.createElement("th");
-                        const text = document.createTextNode(key);
-                        th.appendChild(text);
-                        row.appendChild(th);
-                    });
-                }
-
                 // Append received data to the table
-                const row = dataTable.insertRow();
+                //const row = dataTable.insertRow();
 
-                ["timestamp", "dBA"].forEach(key => {
-                    const cell = row.insertCell();
-                    const text = document.createTextNode(data[key]);
-                    cell.appendChild(text);
-                });
+                //["timestamp", "dBA"].forEach(key => {
+                    //const cell = row.insertCell();
+                    //const text = document.createTextNode(data[key]);
+                    //cell.appendChild(text);
+                //});
 
                 // Update the bar graph
                 const bar = document.getElementById('bar');
@@ -188,7 +196,11 @@
                 lineGraphData.datasets[0].data.push(data.dBA);
                 lineGraph.update();
 
-
+                //Bar chart updatoooo
+                let tertsKeys = Object.keys(data).filter(key => key.startsWith("terts"));
+                tertBarChartData.labels = tertsKeys;
+                tertBarChartData.datasets[0].data = tertsKeys.map(key => data[key]);
+                tertBarChart.update();
             });
 
             var counter = 0;
