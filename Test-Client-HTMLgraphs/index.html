@@ -79,13 +79,13 @@
         </div>
 
         <canvas id="lineGraph" width="200" height="100"></canvas>
-       
+
     </div>
 
     <div>
         <canvas id="tertsBarChart"></canvas>
     </div>
-   
+
 
 
 
@@ -119,6 +119,19 @@
         };
         let lineGraph = new Chart(lineGraphCtx, lineGraphConfig);
 
+
+
+        function generateGradient(ctx, index, totalBars) {
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            const hue = (index / totalBars) * 265;  // Distributes hues evenly across the 360-degree spectrum
+            const color1 = `hsl(${hue}, 100%, 50%)`;
+            const color2 = `hsl(${(hue + 30) % 360}, 100%, 50%)`;  // Adds 30 to hue for a bit of color variation
+            gradient.addColorStop(0, color1);
+            gradient.addColorStop(1, color2);
+            return gradient;
+        }
+
+
         // bar chart
         let tertBarChartCtx = document.getElementById('tertsBarChart').getContext('2d');
         let tertBarChartData = {
@@ -126,11 +139,12 @@
             datasets: [{
                 label: 'Terts Values',
                 data: [],  // Y-axis data points for the "terts" values
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: Array.from({ length: 31 }, (_, index) => generateGradient(tertBarChartCtx, index, 31)),
+                borderColor: 'rgba(75, 69, 69, 1)',
                 borderWidth: 1
             }]
         };
+
         let tertBarChartConfig = {
             type: 'bar',
             data: tertBarChartData,
@@ -172,9 +186,9 @@
                 //const row = dataTable.insertRow();
 
                 //["timestamp", "dBA"].forEach(key => {
-                    //const cell = row.insertCell();
-                    //const text = document.createTextNode(data[key]);
-                    //cell.appendChild(text);
+                //const cell = row.insertCell();
+                //const text = document.createTextNode(data[key]);
+                //cell.appendChild(text);
                 //});
 
                 // Update the bar graph
@@ -187,7 +201,7 @@
                 if (normalizedDBA < 0) normalizedDBA = 0;
                 if (normalizedDBA > 1) normalizedDBA = 1;
 
-                bar.style.height = `${300-(normalizedDBA * maxGraphHeight)}px`;
+                bar.style.height = `${300 - (normalizedDBA * maxGraphHeight)}px`;
 
 
                 // Update the latest dBA value display
