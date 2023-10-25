@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AsasenseService } from 'src/services/asasense.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { AsasenseService } from 'src/services/asasense.service';
   styleUrls: ['./statsblock.component.css']
 })
 export class StatsblockComponent implements OnInit {
+
+  @Input() nodeNumber: string = '';
 
   constructor(private asasense: AsasenseService) { }
 
