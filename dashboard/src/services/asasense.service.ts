@@ -36,9 +36,14 @@ export class AsasenseService {
 
   GetLastMinute(): Observable<any> {
     const lastMinute = new Date().getTime() / 1000
-    const minuteBefore = lastMinute - 60
+    const minuteBefore = lastMinute - 120
 
-    return this.httpClient.get<any>(`https://api-new.asasense.com/ambient/node/17/measurements/${lastMinute}/${minuteBefore}`, { headers: this.headers })
+    try{
+      return this.httpClient.get<any>(`https://api-new.asasense.com/ambient/node/17/measurements/${minuteBefore}/${lastMinute}`, { headers: this.headers })
+    } catch (error){
+      console.log(error)
+      throw error
+    }
   }
 
   get CurrentDate() {

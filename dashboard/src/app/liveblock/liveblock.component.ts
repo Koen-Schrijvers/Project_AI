@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AsasenseService } from 'src/services/asasense.service';
 
 @Component({
@@ -7,7 +7,8 @@ import { AsasenseService } from 'src/services/asasense.service';
   styleUrls: ['./liveblock.component.css']
 })
 export class LiveblockComponent implements OnInit {
-
+  
+  @Input() nodeNumber: string = '';
   lastMinute: number[] = []
 
   constructor(private asasense: AsasenseService) {
@@ -15,13 +16,14 @@ export class LiveblockComponent implements OnInit {
     this.asasense.GetLastMinute().subscribe((response) => {
       this.lastMinute = response.data[1]
     })
-
+    
     setInterval(() => {
       this.asasense.GetLastMinute().subscribe((response) => {
         this.lastMinute = response.data[1]
+        console.log('in live block')
         console.log('minute passed')
       })
-    }, 60000)
+    }, 1000)
   }
 
   ngOnInit(): void {
