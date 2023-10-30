@@ -1,19 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AsasenseService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    setInterval(() => this.GetLastMinute(), 10000)
+  }
 
   private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTcsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNjk4MjI4MDg0LCJleHAiOjE3MDA4MjAwODR9.cVSrc8FdKFIhq965BIRepuJVjKT-6iRCM8GssTBUts0"
   private headers = { 'Authorization': this.jwtToke }
   private meanDay: number = 0;
   private dayDataDba: number[] = []
   private dayDataTime: number[] = []
-
+  private lastMinuteArray: number[] = []
 
   private unixStartTest: string = '1698136636'
   private unixEndTest: string = '1698316451'
@@ -31,6 +34,13 @@ export class AsasenseService {
       );
   }
 
+  GetLastMinute(): Observable<any> {
+    const lastMinute = new Date().getTime() / 1000
+    const minuteBefore = lastMinute - 60
+
+    return this.httpClient.get<any>(`https://api-new.asasense.com/ambient/node/17/measurements/${lastMinute}/${minuteBefore}`, { headers: this.headers })
+  }
+
   get CurrentDate() {
     return Math.floor(this.currentDate.getTime() / 1000);
   }
@@ -41,11 +51,11 @@ export class AsasenseService {
 
   get StartDayUnix() {
     var beginDate = new Date()
-    beginDate.setHours(0, 0, 0)
+    beginDate.setHours(2, 0, 0)
     return Math.floor(beginDate.getTime() / 1000);
   }
 
-  private calculateAverage(data: number[]): number {
+  calculateAverage(data: number[]): number {
     if (data.length === 0) {
       return 0;
     }

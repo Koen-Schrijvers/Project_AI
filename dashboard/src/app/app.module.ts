@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StatsblockComponent } from './statsblock/statsblock.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LiveblockComponent } from './liveblock/liveblock.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StatsblockComponent
+    StatsblockComponent,
+    LiveblockComponent
   ],
   imports: [
     BrowserModule,
