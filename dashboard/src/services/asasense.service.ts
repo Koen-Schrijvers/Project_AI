@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { dailyOject } from './interfaces/dailyobject';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 export class AsasenseService {
 
   constructor(private httpClient: HttpClient) {
-    setInterval(() => this.GetLastMinute(), 10000)
+    
   }
 
   private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTcsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNjk4MjI4MDg0LCJleHAiOjE3MDA4MjAwODR9.cVSrc8FdKFIhq965BIRepuJVjKT-6iRCM8GssTBUts0"
@@ -37,9 +38,19 @@ export class AsasenseService {
   GetLastMinute(): Observable<any> {
     const lastMinute = new Date().getTime() / 1000
     const minuteBefore = lastMinute - 120
-
+    
     try{
       return this.httpClient.get<any>(`https://api-new.asasense.com/ambient/node/17/measurements/${minuteBefore}/${lastMinute}`, { headers: this.headers })
+    } catch (error){
+      console.log(error)
+      throw error
+    }
+  }
+
+  GetDailyStatistics(){
+    try{
+      var response = this.httpClient.get<dailyOject[]>(`https://api-new.asasense.com/ambient/node/17/dailystatistics`, { headers: this.headers })
+      return response
     } catch (error){
       console.log(error)
       throw error

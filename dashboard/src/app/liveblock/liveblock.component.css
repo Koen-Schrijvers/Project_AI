@@ -3,18 +3,22 @@
 }
 
 .block-container {
-    background-color: lightgray;
-    width: 11rem;
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
     height: 10rem;
-
+    width: 90%;
     border-radius: 1rem;
-
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+    margin: 1rem auto 1rem auto;
+    /*margin: auto auto auto auto;*/
     position: relative;
 }
-
+app-scalebar{
+    width: 100%;
+}
 .block-container p {
-    color: white;
-
     font-size: 1rem;
 }
 
@@ -22,9 +26,9 @@
     position: absolute;
     left: 1rem;
     top: 1rem;
+    width: 100%;
 }
 
 .dba {
     font-size: 2rem;
-    color: white;
 }
