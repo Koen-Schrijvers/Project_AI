@@ -11,6 +11,7 @@ import { ChartComponent } from './chart/chart.component';
 import { ScalebarComponent } from './scalebar/scalebar.component';
 import { MapComponent } from './map/map.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { OorzaakdashboardComponent } from './oorzaakdashboard/oorzaakdashboard.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ChartComponent,
     ScalebarComponent,
     MapComponent,
-    DashboardComponent
+    DashboardComponent,
+    OorzaakdashboardComponent
   ],
   imports: [
     BrowserModule,
