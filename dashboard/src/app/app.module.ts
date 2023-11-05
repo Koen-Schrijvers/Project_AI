@@ -12,6 +12,8 @@ import { ScalebarComponent } from './scalebar/scalebar.component';
 import { MapComponent } from './map/map.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OorzaakdashboardComponent } from './oorzaakdashboard/oorzaakdashboard.component';
+import { ChartDagWetenschapComponent } from './chart-dag-wetenschap/chart-dag-wetenschap.component';
+import { LineBirdComponent } from './line-bird/line-bird.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { OorzaakdashboardComponent } from './oorzaakdashboard/oorzaakdashboard.c
     ScalebarComponent,
     MapComponent,
     DashboardComponent,
-    OorzaakdashboardComponent
+    OorzaakdashboardComponent,
+    ChartDagWetenschapComponent,
+    LineBirdComponent
   ],
   imports: [
     BrowserModule,
