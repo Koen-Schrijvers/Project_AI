@@ -1,0 +1,12 @@
+.map-container{
+    width: 20rem;
+    height: 20rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 0
+    ;
+}
+#map {
+    
+    width: 100%;
+}

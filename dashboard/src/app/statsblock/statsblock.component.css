@@ -3,17 +3,19 @@
 }
 
 .block-container {
-    background-color: red;
-    width: 11rem;
+    background-color: #CD5C5C;
     height: 10rem;
-
-    border-radius: 1rem;
-
     position: relative;
+    width: 90%;
+    border-radius: 1rem;
+    margin: 4rem auto auto auto;
+
+
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 
 .block-container p {
-    color: white;
+    color: #ddd0d0;
 
     font-size: 1rem;
 }
