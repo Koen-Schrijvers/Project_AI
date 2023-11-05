@@ -1,32 +1,30 @@
 html,
 body {
-    height: 100%;
-    width: 100%;
+    
     margin: 0;
     padding: 0;
-
+    overflow: hidden;
 }
 
-.parent {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+footer{
+    border-top: solid 2px lightgray;
+    min-height: 5rem;
+    margin-top: 2.5rem;
 }
 
-.div1 {
-    grid-area: 4 / 4 / 5 / 5;
+.footer-img-container{
+    display: flex;
+    width: 100%;
 }
 
-.div2 {
-    grid-area: 4 / 5 / 5 / 6;
+.footer-img{
+    width: 70vw;
+    margin: auto;
 }
 
-.div3 {
-    grid-area: 5 / 5 / 6 / 6;
-}
-
-.div4 {
-    grid-area: 5 / 4 / 6 / 5;
-}
+@media (min-width: 768px) {
+    .parent{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+  }

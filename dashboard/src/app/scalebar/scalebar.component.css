@@ -1,0 +1,18 @@
+.bar{
+    width: 80%;
+    height: 0.5rem;
+    position: relative;
+    border-radius: 1.8rem;
+    margin: auto;
+
+    background: rgb(19,255,2);
+    background: linear-gradient(90deg, rgba(19,255,2,1) 0%, rgba(62,121,9,1) 17%, rgba(211,255,0,1) 39%, rgba(255,231,0,1) 57%, rgba(255,166,0,1) 75%, rgba(255,0,0,1) 91%);
+}
+
+.arrow{
+    bottom: -20px;
+    font-size: 2rem;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+}
