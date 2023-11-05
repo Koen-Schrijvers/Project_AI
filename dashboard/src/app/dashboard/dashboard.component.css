@@ -45,7 +45,7 @@
 }
 #parrot-head{
     background-image: url('/assets/parrot.png'); 
-    background-size: cover;
+    background-size: 125%;
 }
 .AI-container{
     height: 15%;
