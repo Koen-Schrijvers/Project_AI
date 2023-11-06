@@ -2,5 +2,27 @@
     width: 100%;
     height: 100%;
 
-    border: 2px solid black;
+   
+}
+
+#barGraph {
+    background: linear-gradient(to top, green, orange, red);
+
+    width: 100%;
+}
+
+#bar {
+    background-color: white;
+    width:100%;
+    
+}
+
+.flipped {
+    transform: rotate(180deg);
+}
+
+#latestDBA {
+    text-align: center;
+    left: -4px;
+    top:5px;
 }
