@@ -1,0 +1,32 @@
+
+.block-container {
+    background-color: rgb(248, 248, 248);
+    color: black;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 90%;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+    margin: 1rem auto 1rem auto;
+    /*margin: auto auto auto auto;*/
+    position: relative;
+    font-family: 'Roboto Condensed', sans-serif;
+    justify-content: center;
+}
+
+h1{
+    text-align: center;
+}
+canvas{
+    margin-bottom: 2rem;
+    width: 50%;
+}
+
+.list-container{
+    margin-left: 4rem;
+}
+
+ul{
+    list-style: none;
+}

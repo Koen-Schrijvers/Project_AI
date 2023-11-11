@@ -21,7 +21,7 @@ export class LiveblockComponent implements OnInit {
       this.asasense.GetLastMinute().subscribe((response) => {
         this.lastMinute = response.data[1]
       })
-    }, 60000)
+    }, 2000)
   }
 
   ngOnInit(): void {

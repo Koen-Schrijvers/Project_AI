@@ -1,0 +1,15 @@
+.search-container{
+    width: 60%;
+    height: 1.5rem;
+    margin: auto;
+    margin-top: 0.5rem;
+    background-color: lightgray;
+    border-radius: 1rem;
+    position: relative;
+}
+
+.search{
+    position: absolute;
+    right: 10px;
+    top: 3px;
+}

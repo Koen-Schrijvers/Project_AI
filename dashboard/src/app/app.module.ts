@@ -10,6 +10,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ChartComponent } from './chart/chart.component';
 import { ScalebarComponent } from './scalebar/scalebar.component';
 import { MapComponent } from './map/map.component';
+import { PiechartComponent } from './piechart/piechart.component';
+import { SearchbarComponent } from './searchbar/searchbar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { MapComponent } from './map/map.component';
     NavbarComponent,
     ChartComponent,
     ScalebarComponent,
-    MapComponent
+    MapComponent,
+    PiechartComponent,
+    SearchbarComponent
   ],
   imports: [
     BrowserModule,

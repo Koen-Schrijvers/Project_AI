@@ -20,7 +20,7 @@ export class StatsblockComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    //this.asasense.GetDataWithUnixTime(String(this.asasense.StartDayUnix), String(this.asasense.CurrentDate))
+    this.asasense.GetDataWithUnixTime(String(this.asasense.StartDayUnix), String(this.asasense.CurrentDate))
   }
 
   get DayText() {
