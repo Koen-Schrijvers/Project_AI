@@ -12,18 +12,28 @@ import { ScalebarComponent } from './scalebar/scalebar.component';
 import { MapComponent } from './map/map.component';
 import { PiechartComponent } from './piechart/piechart.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { BarChartVolumeDisplayer9000Component } from './dashboard/bar-chart-volume-displayer9000/bar-chart-volume-displayer9000.component';
+import { OorzaakdashboardComponent } from './oorzaakdashboard/oorzaakdashboard.component';
+import { ChartDagWetenschapComponent } from './chart-dag-wetenschap/chart-dag-wetenschap.component';
+import { LineBirdComponent } from './line-bird/line-bird.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StatsblockComponent,
     LiveblockComponent,
+    DashboardComponent,
+    BarChartVolumeDisplayer9000Component,
     NavbarComponent,
     ChartComponent,
     ScalebarComponent,
     MapComponent,
     PiechartComponent,
-    SearchbarComponent
+    SearchbarComponent,
+    OorzaakdashboardComponent,
+    ChartDagWetenschapComponent,
+    LineBirdComponent
   ],
   imports: [
     BrowserModule,
