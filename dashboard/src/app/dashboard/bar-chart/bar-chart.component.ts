@@ -9,7 +9,6 @@ import { AsasenseService } from 'src/services/asasense.service';
 export class BarChartComponent implements OnInit{
 
   @ViewChild('indicator', { static: true }) indicator!: ElementRef<HTMLElement>;
-  @ViewChild('TextCanvas', { static: true }) TextCanvas!: ElementRef<HTMLCanvasElement>;
   @Input() node: string = "17"
   lastMinute: number[] = []
   currentIndex: number = 0
@@ -17,6 +16,8 @@ export class BarChartComponent implements OnInit{
   constructor(private asasense: AsasenseService) {}
 
   ngOnInit(): void {
+
+    
 
     this.asasense.GetLastMinuteByNode(this.node).subscribe((response) => {
       this.lastMinute = response.data[1]
@@ -37,6 +38,9 @@ export class BarChartComponent implements OnInit{
       if(this.currentIndex >= this.lastMinute.length){
         this.currentIndex = this.lastMinute.length-1
       }
+
+
+      
     },125)
   }
 
@@ -46,15 +50,10 @@ export class BarChartComponent implements OnInit{
     const newPosition = index; 
     arrow.style.bottom = newPosition + '%';
     //text.style.bottom = newPosition + '%';
+
+    //arrow.children[0].innerHTML = lastMinute;
+    
   }
-  updateCanvas(){
-    const canvas = this.TextCanvas.nativeElement;
-    var context = canvas.getContext('2d');
-    if (context) {
-      context.font = '15px Arial';
-      context.fillStyle = 'black'; 
-      context.fillText('Hello, Canvas!', 15, 20);
-    }
-  }
+  
 
 }

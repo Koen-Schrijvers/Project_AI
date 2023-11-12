@@ -2,11 +2,8 @@
     <div class="item"></div>
     <div class="item">
         <div class="bar">
-            <i #indicator class="bi bi-caret-left-fill arrow"></i>
-        </div>
+            <i #indicator class="bi bi-caret-left-fill arrow"><div id="dbCounter">{{this.lastMinute[this.currentIndex]|number: "2.0-0"}}dB</div></i>
     </div>
-    <div class="item">
-        <canvas #TextCanvas class="text"></canvas>
-    </div>
+    
 </div>
 
