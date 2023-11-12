@@ -13,10 +13,9 @@ import { MapComponent } from './map/map.component';
 import { PiechartComponent } from './piechart/piechart.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { BarChartVolumeDisplayer9000Component } from './dashboard/bar-chart-volume-displayer9000/bar-chart-volume-displayer9000.component';
 import { OorzaakdashboardComponent } from './oorzaakdashboard/oorzaakdashboard.component';
 import { ChartDagWetenschapComponent } from './chart-dag-wetenschap/chart-dag-wetenschap.component';
-import { LineBirdComponent } from './line-bird/line-bird.component';
+import { LineBirdComponent } from './dashboard/line-bird/line-bird.component';
 import { LineLionComponent } from './dashboard/line-lion/line-lion.component';
 
 @NgModule({
@@ -25,7 +24,6 @@ import { LineLionComponent } from './dashboard/line-lion/line-lion.component';
     StatsblockComponent,
     LiveblockComponent,
     DashboardComponent,
-    BarChartVolumeDisplayer9000Component,
     NavbarComponent,
     ChartComponent,
     ScalebarComponent,

@@ -1,20 +1,18 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
-import { Observable } from 'rxjs';
 import { AsasenseService } from 'src/services/asasense.service';
 import { BirdserviceService } from 'src/services/birdservice.service';
 import { dailyOject } from 'src/services/interfaces/dailyobject';
-import { LionserviceService } from 'src/services/lionservice.service';
 
 @Component({
-  selector: 'app-line-lion',
-  templateUrl: './line-lion.component.html',
-  styleUrls: ['./line-lion.component.css']
+  selector: 'app-line-bird',
+  templateUrl: './line-bird.component.html',
+  styleUrls: ['./line-bird.component.css']
 })
-export class LineLionComponent implements AfterViewInit{
+export class LineBirdComponent{
   chart: any;
   
-  constructor(private service : LionserviceService) {
+  constructor(private service : BirdserviceService) {
 
   }
   ngAfterViewInit() {
@@ -30,14 +28,14 @@ export class LineLionComponent implements AfterViewInit{
     },180000)
   }
   createChart(){
-    this.chart = new Chart("canvas", {
+    this.chart = new Chart("canvasbird", {
       type: 'line', 
       data: {
         labels: this.service.intervalDataTime, 
 	       datasets: [
           {
             data:this.service.intervalDataDba,
-            borderColor : '#fb991a',
+            borderColor : '#179ef6',
             pointStyle:false,
             
           }

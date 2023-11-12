@@ -36,7 +36,7 @@ export class LionserviceService {
     const startTimestamp = endTimestamp - intervalInSeconds;
     console.log(endTimestamp)
     
-    const observable = this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/17/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers });
+    const observable = this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/27/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers });
 
     observable.subscribe((response) => {
       const middleTime = this.getMiddleElement(response.data[0])
@@ -58,7 +58,7 @@ export class LionserviceService {
       const endTimestamp = currentTimeInSeconds - i * intervalInSeconds;
       const startTimestamp = endTimestamp - intervalInSeconds;
 
-      const observable = this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/17/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers });
+      const observable = this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/27/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers });
 
       observables.unshift(observable);
     }
