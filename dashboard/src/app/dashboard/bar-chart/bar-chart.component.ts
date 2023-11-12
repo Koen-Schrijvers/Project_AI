@@ -16,9 +16,8 @@ export class BarChartComponent implements OnInit{
   constructor(private asasense: AsasenseService) {}
 
   ngOnInit(): void {
-
-    
-
+    const arrow = this.indicator.nativeElement;
+    arrow.style.color = (this.node =="17") ? "#179ef6":"#fb991a"
     this.asasense.GetLastMinuteByNode(this.node).subscribe((response) => {
       this.lastMinute = response.data[1]
     })

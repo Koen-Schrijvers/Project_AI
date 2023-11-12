@@ -1,6 +1,6 @@
 .bar{
-    width: 70%;
-    height: 100%;
+    width: 40%;
+    height: 90%;
     position: relative;
     border-radius: 1.8rem;
     margin: auto;
@@ -22,9 +22,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
 }
-.item{
-    border: 1px solid black
-}
+
 .text{
     border: 1px solid red;
     width: 100%;
@@ -37,4 +35,8 @@
     font-size: 55%;
     margin-left: 70%;
     margin-top: -85%;
+}
+h2{
+    margin: 6px;
+    text-align: center;
 }
