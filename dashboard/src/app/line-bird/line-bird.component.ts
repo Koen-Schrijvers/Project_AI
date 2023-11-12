@@ -29,15 +29,14 @@ export class LineBirdComponent{
 
    this.labels = this.dailyObjects.map(label => {
      const date = new Date(label.day)
-     console.log(date)
+    
      const month = date.getMonth() + 1
-     console.log(month)
+
      const day = date.getDate()
      return `${day}-${month}`
    })
    this.data = this.dailyObjects.map(value => value.LAeq)
-   this.labels.forEach(e => console.log(e))
-   this.data.forEach(e => console.log(e))
+
  }
 
  createChart(){

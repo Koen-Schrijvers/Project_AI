@@ -17,6 +17,7 @@ import { BarChartVolumeDisplayer9000Component } from './dashboard/bar-chart-volu
 import { OorzaakdashboardComponent } from './oorzaakdashboard/oorzaakdashboard.component';
 import { ChartDagWetenschapComponent } from './chart-dag-wetenschap/chart-dag-wetenschap.component';
 import { LineBirdComponent } from './line-bird/line-bird.component';
+import { LineLionComponent } from './dashboard/line-lion/line-lion.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LineBirdComponent } from './line-bird/line-bird.component';
     SearchbarComponent,
     OorzaakdashboardComponent,
     ChartDagWetenschapComponent,
-    LineBirdComponent
+    LineBirdComponent,
+    LineLionComponent
   ],
   imports: [
     BrowserModule,
