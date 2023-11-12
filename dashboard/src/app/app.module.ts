@@ -16,6 +16,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { OorzaakdashboardComponent } from './oorzaakdashboard/oorzaakdashboard.component';
 import { ChartDagWetenschapComponent } from './chart-dag-wetenschap/chart-dag-wetenschap.component';
 import { LineBirdComponent } from './dashboard/line-bird/line-bird.component';
+import { BarChartComponent } from './dashboard/bar-chart/bar-chart.component';
 import { LineLionComponent } from './dashboard/line-lion/line-lion.component';
 
 @NgModule({
@@ -33,6 +34,7 @@ import { LineLionComponent } from './dashboard/line-lion/line-lion.component';
     OorzaakdashboardComponent,
     ChartDagWetenschapComponent,
     LineBirdComponent,
+    BarChartComponent,
     LineLionComponent
   ],
   imports: [
