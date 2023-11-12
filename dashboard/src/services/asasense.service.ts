@@ -35,6 +35,17 @@ export class AsasenseService {
       );
   }
 
+  GetLastMinuteByNode(node: string): Observable<any> {
+    const lastMinute = new Date().getTime() / 1000
+    const minuteBefore = lastMinute - 120
+    
+    try{
+      return this.httpClient.get<any>(`https://api-new.asasense.com/ambient/node/${node}/measurements/${minuteBefore}/${lastMinute}`, { headers: this.headers })
+    } catch (error){
+      console.log(error)
+      throw error
+    }
+  }
   GetLastMinute(): Observable<any> {
     const lastMinute = new Date().getTime() / 1000
     const minuteBefore = lastMinute - 120
@@ -46,6 +57,7 @@ export class AsasenseService {
       throw error
     }
   }
+
 
   GetDailyStatistics(){
     try{
