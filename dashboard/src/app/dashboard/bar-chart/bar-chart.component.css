@@ -6,6 +6,7 @@
     margin: auto;
     background: rgb(19,255,2);
     background: linear-gradient(0deg, rgba(19,255,2,1) 0%, rgba(62,121,9,1) 17%, rgba(211,255,0,1) 39%, rgba(255,231,0,1) 57%, rgba(255,166,0,1) 75%, rgba(255,0,0,1) 91%);
+    
 }
 
 .arrow{
@@ -29,6 +30,7 @@
     height: 100%;
     margin-left: -15%;
     font-size: 1.5rem;
+
 }
 
 #dbCounter{
@@ -39,4 +41,6 @@
 h2{
     margin: 6px;
     text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+
 }
