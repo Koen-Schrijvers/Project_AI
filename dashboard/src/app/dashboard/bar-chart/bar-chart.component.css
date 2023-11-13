@@ -22,6 +22,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
+    
 }
 
 .text{
@@ -43,4 +44,9 @@ h2{
     text-align: center;
     font-family: 'Roboto Condensed', sans-serif;
 
+}
+
+.pictograms{
+    position: absolute;
+    height: 38%;
 }
