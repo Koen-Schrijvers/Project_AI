@@ -5,7 +5,7 @@
     border-radius: 1.8rem;
     margin: auto;
     background: rgb(19,255,2);
-    background: linear-gradient(0deg, rgba(19,255,2,1) 0%, rgba(62,121,9,1) 17%, rgba(211,255,0,1) 39%, rgba(255,231,0,1) 57%, rgba(255,166,0,1) 75%, rgba(255,0,0,1) 91%);
+    background: linear-gradient(0deg, rgba(19,255,2,1) 0%, rgba(211,255,0,1) 25%, rgba(255,231,0,1) 50%, rgba(255,166,0,1) 75%, rgba(255,0,0,1) 100%);
     
 }
 
@@ -13,8 +13,16 @@
     bottom: -1rem;
     font-size: 2.5rem;
     position: absolute;
-    right: -25px;
     z-index: 1;
+
+}
+#lion-arrow{
+    right: 65%;
+    color: #fb991a;
+}
+#birds-arrow{
+    right: -100%;
+    color: #179ef6;
 }
 
 .container{
@@ -39,11 +47,20 @@
     margin-left: 70%;
     margin-top: -85%;
 }
+#dbCounter2{
+    font-size: 55%;
+    margin-left: -85%;
+    margin-top: -85%;
+}
 h2{
     margin: 6px;
     text-align: center;
     font-family: 'Roboto Condensed', sans-serif;
-
+}
+h4{
+    margin: 6px;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .pictograms{
