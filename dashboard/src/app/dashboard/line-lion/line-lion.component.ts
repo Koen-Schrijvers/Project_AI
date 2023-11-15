@@ -13,27 +13,31 @@ import { LionserviceService } from 'src/services/lionservice.service';
 })
 export class LineLionComponent implements AfterViewInit{
   chart: any;
+  minuteInMilliseconds : number = 60000
   
   constructor(private service : LionserviceService) {
 
   }
   ngAfterViewInit() {
-    this.service.GetData().subscribe((success: boolean) => {
+    this.service.GetFirstChunkDate("27").subscribe((success: boolean) => {
       if (success) {
         this.createChart();
       } 
     });
 
     setInterval(() => {
-      this.service.GetLiveDate()
-      this.chart.update();
-    },180000)
+      this.service.GetLiveData("27").subscribe((succes : boolean) => {
+        if (succes){
+          this.chart.update()
+        }
+      })
+    },this.minuteInMilliseconds)
   }
   createChart(){
     this.chart = new Chart("canvas", {
       type: 'line', 
       data: {
-        labels: this.service.intervalDataTime, 
+        labels: this.service.unixTimeStamp, 
 	       datasets: [
           {
             data:this.service.intervalDataDba,
@@ -51,6 +55,9 @@ export class LineLionComponent implements AfterViewInit{
             }
           },
           y : {
+            suggestedMin:50,
+            suggestedMax : 90,
+              
             ticks : {
               color : "#b6012f"
             }

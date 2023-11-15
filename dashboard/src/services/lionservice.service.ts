@@ -23,57 +23,41 @@ export class LionserviceService {
     return localDate;
   }
 
-  public intervalDataTime : string[] = []
+  public intervalDataTime : number[] = []
+  public unixTimeStamp : string [] = []
   public intervalDataDba : number[] = []
 
   
-  GetLiveDate(){
-    const currentTimeInSeconds = Date.now() / 1000;
+  GetFirstChunkDate(nodeNumber : string): Observable<boolean> {
+    const startTimestamp = new Date().setHours(11,0,0) / 1000
+    const endTimestamp = Date.now() / 1000
+    console.log(startTimestamp)
 
-    const intervalInSeconds = 3 * 60;
-
-    const endTimestamp = currentTimeInSeconds;
-    const startTimestamp = endTimestamp - intervalInSeconds;
-    console.log(endTimestamp)
     
-    const observable = this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/27/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers });
-
-    observable.subscribe((response) => {
-      const middleTime = this.getMiddleElement(response.data[0])
-      const averageDba = this.calculateAverage(response.data[1])
-
-      this.intervalDataTime.push(this.unixTimestampToTime(middleTime))
-      this.intervalDataDba.push(averageDba);
-    })
+    return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
+    .pipe(map(response => {
+      this.intervalDataTime = response.data[0];
+      this.unixTimeStamp = this.intervalDataTime.map(e => this.unixTimestampToTime(e))
+      this.intervalDataDba = response.data[1];
+      console.log(this.intervalDataDba)
+      return true;
+    }));
   }
 
-  GetData(): Observable<boolean> {
-    const currentTimeInSeconds = Date.now() / 1000;
-    const intervalInSeconds = 3 * 60;
-    const numberOfIntervals = 20;
+  GetLiveData(nodeNumber : string): Observable<boolean> {
+    const endTimestamp = Date.now() / 1000;
+    const intervalInSeconds = 60;
+    const startTimestamp = endTimestamp - intervalInSeconds;
     
-    const observables = [];
+    return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
+    .pipe(map(response => {
+      this.intervalDataTime = response.data[0];
+      this.unixTimeStamp.push(...this.intervalDataTime.map(e => this.unixTimestampToTime(e)))
+      this.intervalDataDba.push(...response.data[1]);
 
-    for (let i = 0; i < numberOfIntervals; i++) {
-      const endTimestamp = currentTimeInSeconds - i * intervalInSeconds;
-      const startTimestamp = endTimestamp - intervalInSeconds;
-
-      const observable = this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/27/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers });
-
-      observables.unshift(observable);
-    }
-
-    return forkJoin(observables).pipe(
-      map((responses: dataObject[]) => {
-        responses.forEach(response => {
-  
-          const middleTime = this.getMiddleElement(response.data[0])
-          this.intervalDataTime.push(this.unixTimestampToTime(middleTime))
-          this.intervalDataDba.push(this.calculateAverage(response.data[1]));
-        });
-        return true;
-      })
-    );
+      return true;
+    }));
+    
   }
   
   getMiddleElement(arr: number[]) : number{
