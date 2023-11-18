@@ -8,46 +8,70 @@ import { AsasenseService } from 'src/services/asasense.service';
 })
 export class BarChartComponent implements OnInit{
 
-  @ViewChild('indicator', { static: true }) indicator!: ElementRef<HTMLElement>;
+  @ViewChild('indicatorLion', { static: true }) indicatorLions!: ElementRef<HTMLElement>;
+  @ViewChild('indicatorBirds', { static: true }) indicatorBirds!: ElementRef<HTMLElement>;
   @Input() node: string = "17"
-  lastMinute: number[] = []
-  currentIndex: number = 0
+  lastMinuteBirds: number[] = []
+  lastMinuteLions: number[] = []
+  currentIndexBirds: number = 0
+  currentIndexLions: number = 0
+  minValue: number = 30;
+  maxValue: number = 100;
+  BarScale: number = this.maxValue - this.minValue;
 
   constructor(private asasense: AsasenseService) {}
 
   ngOnInit(): void {
-    const arrow = this.indicator.nativeElement;
-    arrow.style.color = (this.node =="17") ? "#179ef6":"#fb991a"
-    this.asasense.GetLastMinuteByNode(this.node).subscribe((response) => {
-      this.lastMinute = response.data[1]
+    this.asasense.GetLastMinuteByNode("17").subscribe((response) => {
+      this.lastMinuteBirds = response.data[1]
+    })
+    this.asasense.GetLastMinuteByNode("27").subscribe((response) => {
+      this.lastMinuteLions = response.data[1]
     })
     //refresh data every minute
     setInterval(() => {
-      this.asasense.GetLastMinuteByNode(this.node).subscribe((response) => {
-        this.lastMinute = response.data[1]
-        this.currentIndex=0
-        
+      console.log("ophaal moment")
+      const startTime1 = new Date().getTime();
+      const startTime2 = new Date().getTime();
+      this.asasense.GetLastMinuteByNode("17").subscribe((response) => {
+        const endTime = new Date().getTime();
+        const duration = endTime - startTime1;
+        console.log(`Request duration1: ${duration} milliseconds`);
+
+        this.lastMinuteBirds = response.data[1]
+        this.currentIndexBirds=0
+      })
+      this.asasense.GetLastMinuteByNode("27").subscribe((response) => {
+        const endTime = new Date().getTime();
+        const duration = endTime - startTime2;
+        console.log(`Request duration2: ${duration} milliseconds`);
+
+        this.lastMinuteLions = response.data[1]
+        this.currentIndexLions=0
       })
     }, 60000)
 
     setInterval(()=>{
       //update arrow 
-      this.updateArrowPosition(this.lastMinute[this.currentIndex])
-      this.currentIndex++
-      if(this.currentIndex >= this.lastMinute.length){
-        this.currentIndex = this.lastMinute.length-1
+      this.updateArrowPosition(this.lastMinuteLions[this.currentIndexLions], this.lastMinuteBirds[this.currentIndexBirds] )
+      this.currentIndexLions++
+      this.currentIndexBirds++
+      if(this.currentIndexBirds >= this.lastMinuteBirds.length){
+        this.currentIndexBirds = this.lastMinuteBirds.length-1
       }
-
-
-      
+      if(this.currentIndexLions >= this.lastMinuteLions.length){
+        this.currentIndexLions = this.lastMinuteLions.length-1
+      }
     },125)
   }
 
-
-  updateArrowPosition(index: number): void {
-    const arrow = this.indicator.nativeElement;
-    const newPosition = index; 
-    arrow.style.bottom = newPosition + '%';
+  updateArrowPosition(Lions_dBA: number, Birds_dBA: number): void {
+    const arrowBirds = this.indicatorBirds.nativeElement;
+    const arrowLions = this.indicatorLions.nativeElement;
+    const newPositionLions = ((Lions_dBA-this.minValue)/(this.BarScale))*100; 
+    const newPositionBirds = ((Birds_dBA-this.minValue)/(this.BarScale))*100; 
+    arrowBirds.style.bottom = newPositionBirds + "%";
+    arrowLions.style.bottom = newPositionLions + "%";
     //text.style.bottom = newPosition + '%';
 
     //arrow.children[0].innerHTML = lastMinute;
