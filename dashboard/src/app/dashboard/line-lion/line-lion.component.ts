@@ -52,7 +52,10 @@ export class LineLionComponent implements AfterViewInit{
           x : {
             ticks : {
               maxTicksLimit: 15,
-              color : "#b6012f"
+              color : "#b6012f",
+              font : {
+                size : 15
+              }
             }
           },
           y : {
@@ -60,7 +63,10 @@ export class LineLionComponent implements AfterViewInit{
             suggestedMax : 80,
               
             ticks : {
-              color : "#b6012f"
+              color : "#b6012f",
+              font : {
+                size : 15
+              }
             }
           },
         },

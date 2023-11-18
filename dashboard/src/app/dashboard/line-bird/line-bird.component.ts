@@ -45,12 +45,18 @@ export class LineBirdComponent{
         scales : {
           x : {
             ticks : {
-              color : "#b6012f"
+              color : "#b6012f",
+              font : {
+                size : 15
+              }
             }
           },
           y : {
             ticks : {
-              color : "#b6012f"
+              color : "#b6012f",
+              font : {
+                size : 15
+              }
             }
           },
         },

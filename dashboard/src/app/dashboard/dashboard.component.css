@@ -13,13 +13,13 @@
 }
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr; 
+    grid-template-columns: 1fr 1fr 0.1fr 1fr 1fr; 
     width: 100%;
     height: 85%;
 }
   
 .column {
-    padding: 5% 20px 0px 20px; 
+    padding: 0px 20px 0px 20px; 
 }
 .profile-container {
     display: flex;
@@ -78,13 +78,23 @@
     border-radius: 10px;
     padding: 3px;
 }
+#lion{
+    grid-column: 1 /span 2;
+}
+#parrot{
+    grid-column: 4 /span 5;
+}
+
+
 .bar{
-    width: 30%;
-    height: 100%;
+    width: 100%;
+    height: 50%;
     background-color: #efddb3;
     border-radius: 10px;
     padding: 3px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    grid-row: 1;
+    margin-top: 18rem;
 }
 .logo-container{
     margin-left: 20px;
