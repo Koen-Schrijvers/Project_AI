@@ -51,12 +51,13 @@ export class LineLionComponent implements AfterViewInit{
         scales : {
           x : {
             ticks : {
+              maxTicksLimit: 15,
               color : "#b6012f"
             }
           },
           y : {
-            suggestedMin:50,
-            suggestedMax : 90,
+            suggestedMin:55,
+            suggestedMax : 80,
               
             ticks : {
               color : "#b6012f"

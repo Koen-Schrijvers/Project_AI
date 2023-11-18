@@ -29,7 +29,7 @@ export class LionserviceService {
 
   
   GetFirstChunkDate(nodeNumber : string): Observable<boolean> {
-    const startTimestamp = new Date().setHours(11,0,0) / 1000
+    const startTimestamp = new Date().setHours(0,0,0) / 1000
     const endTimestamp = Date.now() / 1000
     console.log(startTimestamp)
 
@@ -46,11 +46,12 @@ export class LionserviceService {
 
   GetLiveData(nodeNumber : string): Observable<boolean> {
     const endTimestamp = Date.now() / 1000;
-    const intervalInSeconds = 60;
+    const intervalInSeconds = 10;
     const startTimestamp = endTimestamp - intervalInSeconds;
     
     return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
     .pipe(map(response => {
+      
       this.intervalDataTime = response.data[0];
       this.unixTimeStamp.push(...this.intervalDataTime.map(e => this.unixTimestampToTime(e)))
       this.intervalDataDba.push(...response.data[1]);
