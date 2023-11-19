@@ -1,6 +1,9 @@
 import pandas as pd
 
-df = pd.read_csv('big.csv', sep=',')
+
+csv_filename = 'ambient-measurements-node-27-undefined-Mon Sep 18 2023 10_48_44 GMT+0200 (Midden-Europese zomertijd)-Sat Sep 30 2023 11_48_44 GMT+0200 (Midden-Europese zomertijd).csv'
+
+df = pd.read_csv(csv_filename, sep=',')
 relevant_data = df[["timestamp","terts001250","terts001575","terts001984","terts002500","dBA"]]
 relevant_data['timestamp'] = pd.to_datetime(relevant_data['timestamp'], format="mixed")
 relevant_data.set_index('timestamp', inplace=True)
@@ -19,4 +22,4 @@ possible_lions = possible_lions[possible_lions["dBA"] > 0]
 possible_lions = possible_lions.rename(columns={'dBA': 'Count'})
 possible_lions = possible_lions.sort_values(by='Count', ascending=False)
 
-possible_lions.to_csv('possible-lions.csv')
+possible_lions.to_csv('possible-lionsCSV/possible-lions_.csv')
