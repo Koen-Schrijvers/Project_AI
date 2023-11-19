@@ -12,8 +12,10 @@ def TimestampsToTertsCSV(begin_date, end_date, node, index):
     url = f"https://api-new.asasense.com/ambient/node/{node}/export/{unixStartTime}/{unixEndTime}/csv"
     response = requests.get(url, headers=headers)
 
+    name_template = "lion-tertsCSVS/lion." if node == "27" else "bird-tertsCSVS/bird."
+
     if response.status_code == 200:
-        with open(f'lion-tertsCSVs/lion.{index}.{unixStartTime}_{unixEndTime}.csv', 'wb') as csv_file:
+        with open(f'{name_template}{index}.{unixStartTime}_{unixEndTime}.csv', 'wb') as csv_file:
             csv_file.write(response.content)
         print("CSV file downloaded successfully.")
     else:
