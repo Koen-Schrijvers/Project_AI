@@ -13,11 +13,23 @@
 }
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 0.1fr 1fr 1fr; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 0.5fr 0.5fr;
     width: 100%;
     height: 85%;
 }
-  
+
+#lion{
+    grid-column: 1 /span 2;
+    grid-row: 1;
+
+}
+
+#parrot{
+    grid-column: 1 /span 2;
+    grid-row: 2;
+}
+
 .column {
     padding: 0px 20px 0px 20px; 
 }
@@ -88,13 +100,10 @@
     height: 100%;
     border-radius: 10px;
     padding: 3px;
+    box-sizing: border-box;
+
 }
-#lion{
-    grid-column: 1 /span 2;
-}
-#parrot{
-    grid-column: 4 /span 5;
-}
+
 
 
 .bar{

@@ -3,8 +3,9 @@
     border-radius: 1rem;
     padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-
+    max-height: 25rem;
     font-family: 'Roboto Condensed', sans-serif;
+
 }
 
 h1{

@@ -29,10 +29,8 @@ export class LionserviceService {
 
   
   GetFirstChunkDate(nodeNumber : string): Observable<boolean> {
-    const startTimestamp = new Date().setHours(0,0,0) / 1000
-    const endTimestamp = Date.now() / 1000
-    console.log(startTimestamp)
-
+    const endTimestamp = Math.floor(Date.now() / 1000); // Using Math.floor to ensure an integer value
+    const startTimestamp = endTimestamp - (24 * 60 * 60);
     
     return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
     .pipe(map(response => {

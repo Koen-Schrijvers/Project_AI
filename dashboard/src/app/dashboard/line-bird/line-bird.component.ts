@@ -31,6 +31,7 @@ export class LineBirdComponent{
       })
     },this.minuteInMilliseconds)
   }
+
   createChart(){
     this.chart = new Chart("canvasbird", {
       type: 'line', 
@@ -46,6 +47,7 @@ export class LineBirdComponent{
          ]
       },
       options:{
+        maintainAspectRatio : false,
         animation:false,
         scales : {
           x : {
