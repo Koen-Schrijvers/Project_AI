@@ -28,10 +28,9 @@ public intervalDataDba : number[] = []
 
 
 GetFirstChunkDate(nodeNumber : string): Observable<boolean> {
-  const endTimestamp = Math.floor(Date.now() / 1000); // Using Math.floor to ensure an integer value
+  const endTimestamp = Math.floor(Date.now() / 1000); 
   const startTimestamp = endTimestamp - (24 * 60 * 60);
- 
-  
+
   return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
   .pipe(map(response => {
     this.intervalDataTime = response.data[0];
