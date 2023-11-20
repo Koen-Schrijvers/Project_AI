@@ -48,6 +48,7 @@ export class LineLionComponent implements AfterViewInit{
          ]
       },
       options:{
+        animation:false,
         scales : {
           x : {
             ticks : {           

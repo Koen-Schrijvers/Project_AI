@@ -46,6 +46,7 @@ export class LineBirdComponent{
          ]
       },
       options:{
+        animation:false,
         scales : {
           x : {
             ticks : {
