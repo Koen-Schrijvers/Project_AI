@@ -21,6 +21,18 @@
 .column {
     padding: 0px 20px 0px 20px; 
 }
+
+.row-profile-map{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.map{
+    width: 50%;
+    height: auto;
+    
+}
 .profile-container {
     display: flex;
     /*flex-direction: column;*/
@@ -44,9 +56,6 @@
     border: 10px solid #8F5600
 }
 
-.bird-profile{
-    border:10px solid #179ef6;
-}
 #lion-head{
     background-image: url('/assets/lion.png'); 
     background-size: cover;
@@ -54,6 +63,8 @@
 #parrot-head{
     background-image: url('/assets/parrot.png'); 
     background-size: 125%;
+    border:10px solid #179ef6;
+
 }
 .AI-container{
     height: 15%;

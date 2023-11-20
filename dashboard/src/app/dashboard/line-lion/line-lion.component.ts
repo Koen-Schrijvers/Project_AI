@@ -50,7 +50,7 @@ export class LineLionComponent implements AfterViewInit{
       options:{
         scales : {
           x : {
-            ticks : {
+            ticks : {           
               maxTicksLimit: 15,
               color : "#b6012f",
               font : {

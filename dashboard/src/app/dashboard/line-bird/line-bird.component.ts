@@ -11,27 +11,31 @@ import { dailyOject } from 'src/services/interfaces/dailyobject';
 })
 export class LineBirdComponent{
   chart: any;
-  
+  minuteInMilliseconds : number = 60000
+
   constructor(private service : BirdserviceService) {
 
   }
   ngAfterViewInit() {
-    this.service.GetData().subscribe((success: boolean) => {
+    this.service.GetFirstChunkDate("17").subscribe((success: boolean) => {
       if (success) {
         this.createChart();
       } 
     });
 
     setInterval(() => {
-      this.service.GetLiveDate()
-      this.chart.update();
-    },180000)
+      this.service.GetLiveData("17").subscribe((succes : boolean) => {
+        if (succes){
+          this.chart.update()
+        }
+      })
+    },this.minuteInMilliseconds)
   }
   createChart(){
     this.chart = new Chart("canvasbird", {
       type: 'line', 
       data: {
-        labels: this.service.intervalDataTime, 
+        labels: this.service.unixTimeStamp, 
 	       datasets: [
           {
             data:this.service.intervalDataDba,
@@ -45,15 +49,19 @@ export class LineBirdComponent{
         scales : {
           x : {
             ticks : {
-              color : "#b6012f",
+              maxTicksLimit: 15,
+              color : "#5A1A84",
               font : {
                 size : 15
               }
             }
           },
           y : {
+            suggestedMin:55,
+            suggestedMax : 80,
+              
             ticks : {
-              color : "#b6012f",
+              color : "#5A1A84",
               font : {
                 size : 15
               }

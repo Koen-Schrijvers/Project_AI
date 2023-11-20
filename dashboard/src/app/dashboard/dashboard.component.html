@@ -4,10 +4,15 @@
 <div class="background-container">
     <div class="grid-container">
         <div class="column" id="lion">
-            <div class="profile-container">
-                <div class="profile" id="lion-head"></div>
-               
+            <div class="row-profile-map">
+                <div class="map">
+                    <app-mapsensor [mapsrc]="'assets/zoo leeuw.png'"></app-mapsensor>
+                </div>
+                <div class="profile-container">
+                    <div class="profile" id="lion-head"></div>
+                </div>
             </div>
+           
             <!--<div class="AI-container">
                 <p>AI gedeelte: work in progress</p>
             </div>-->
@@ -26,9 +31,14 @@
             </div>
         </div>
         <div class="column" id="parrot">
-            <div class="profile-container">
-                <div class="profile bird-profile" id="parrot-head"></div>
+            <div class="row-profile-map">
                 
+                <div class="profile-container">
+                    <div class="profile" id="parrot-head"></div>
+                </div>
+                <div class="map">
+                    <app-mapsensor [mapsrc]="'assets/vogels test.png'"></app-mapsensor>
+                </div>
             </div>
             
             <div class="content-container">

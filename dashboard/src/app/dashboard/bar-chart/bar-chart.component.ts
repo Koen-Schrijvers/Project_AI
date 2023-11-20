@@ -31,21 +31,13 @@ export class BarChartComponent implements OnInit{
     //refresh data every minute
     setInterval(() => {
       console.log("ophaal moment")
-      const startTime1 = new Date().getTime();
-      const startTime2 = new Date().getTime();
+      
       this.asasense.GetLastMinuteByNode("17").subscribe((response) => {
-        const endTime = new Date().getTime();
-        const duration = endTime - startTime1;
-        console.log(`Request duration1: ${duration} milliseconds`);
 
         this.lastMinuteBirds = response.data[1]
         this.currentIndexBirds=0
       })
       this.asasense.GetLastMinuteByNode("27").subscribe((response) => {
-        const endTime = new Date().getTime();
-        const duration = endTime - startTime2;
-        console.log(`Request duration2: ${duration} milliseconds`);
-
         this.lastMinuteLions = response.data[1]
         this.currentIndexLions=0
       })
