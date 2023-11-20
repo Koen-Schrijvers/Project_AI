@@ -28,8 +28,8 @@ public intervalDataDba : number[] = []
 
 
 GetFirstChunkDate(nodeNumber : string): Observable<boolean> {
-  const startTimestamp = new Date().setHours(0,0,0) / 1000
-  const endTimestamp = Date.now() / 1000
+  const endTimestamp = Math.floor(Date.now() / 1000); // Using Math.floor to ensure an integer value
+  const startTimestamp = endTimestamp - (24 * 60 * 60);
   console.log(startTimestamp)
 
   
