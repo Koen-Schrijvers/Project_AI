@@ -3,6 +3,9 @@ from matplotlib.colors import Normalize
 
 class SpectroGenerator:
     index = 0
+    def __init__(self, targetDir) -> None:
+        self.targetDir = targetDir
+
     def GenerateSpectros(self,df , time_window, step_size, figsize, category):
         fig, ax = plt.subplots(1, 1, figsize=figsize)
         window = time_window*8
@@ -28,5 +31,5 @@ class SpectroGenerator:
 
         plt.gca().set_axis_off()
         plt.margins(0,0)
-        plt.savefig(f'../data/unsorted/{category}/{category}.{self.index}.png',bbox_inches='tight',pad_inches = 0)
+        plt.savefig(f'{self.targetDir}/{category}/{category}.{self.index}.png',bbox_inches='tight',pad_inches = 0)
         self.index += 1
