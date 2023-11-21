@@ -35,7 +35,7 @@ class DataGenerator:
             timestamps = pd.read_csv(f"timestamps/{category}.csv", sep=',')
 
             #Create png's
-            print(f"Dowloading data and Creating PNG's: 0.00%", end="\r")
+            print(f"Dowloading data and creating PNG's: 0.00%", end="\r")
             for index, row in timestamps.iterrows():
                 self.TimestampsToPNG(row["begin_date"], row["end_date"],node, category)
                 print(f"Dowloading data and Creating PNG's: {(index+1)*100/timestamps.shape[0]:.2f}%", end="\r")
