@@ -11,72 +11,74 @@ import { LionserviceService } from 'src/services/lionservice.service';
   templateUrl: './line-lion.component.html',
   styleUrls: ['./line-lion.component.css']
 })
-export class LineLionComponent implements AfterViewInit{
+export class LineLionComponent implements AfterViewInit {
   chart: any;
-  minuteInMilliseconds : number = 60000
-  
-  constructor(private service : LionserviceService) {
+  minuteInMilliseconds: number = 60000
+
+  constructor(private service: LionserviceService) {
 
   }
   ngAfterViewInit() {
     this.service.GetFirstChunkDate("27").subscribe((success: boolean) => {
       if (success) {
-        this.createChart();
-      } 
+        //this.createChart();
+      }
     });
 
     setInterval(() => {
-      this.service.GetLiveData("27").subscribe((succes : boolean) => {
-        if (succes){
-          this.chart.update()
+      this.service.GetLiveData("27").subscribe((succes: boolean) => {
+        if (succes) {
+          //this.chart.update()
         }
       })
-    },this.minuteInMilliseconds)
+    }, this.minuteInMilliseconds)
   }
-  createChart(){
+  createChart() {
     this.chart = new Chart("canvas", {
-      type: 'line', 
+      type: 'line',
       data: {
-        labels: this.service.unixTimeStamp, 
-	       datasets: [
+        labels: this.service.unixTimeStamp,
+        datasets: [
           {
-            data:this.service.intervalDataDba,
-            borderColor : '#fb991a',
-            pointStyle:false,
-            
+            data: this.service.intervalDataDba,
+            borderColor: '#fb991a',
+            pointStyle: false,
+
           }
-         ]
+        ]
       },
-      options:{
-        maintainAspectRatio : false,
-        scales : {
-          x : {
-            ticks : {           
+      options: {
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            ticks: {
               maxTicksLimit: 15,
-              color : "#b6012f",
-              font : {
-                size : 15
+              color: "#b6012f",
+              font: {
+                size: 15
               }
             }
           },
-          y : {
-            suggestedMin:55,
-            suggestedMax : 80,
-              
-            ticks : {
-              color : "#b6012f",
-              font : {
-                size : 15
+          y: {
+            suggestedMin: 55,
+            suggestedMax: 80,
+
+            ticks: {
+              color: "#b6012f",
+              font: {
+                size: 15
               }
             }
           },
         },
-        responsive : true,
-        plugins:{legend:{
-          display : false
-        }}
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
       }
     },
-  );
+    );
   }
 }

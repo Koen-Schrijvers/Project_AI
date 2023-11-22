@@ -9,74 +9,81 @@ import { dailyOject } from 'src/services/interfaces/dailyobject';
   templateUrl: './line-bird.component.html',
   styleUrls: ['./line-bird.component.css']
 })
-export class LineBirdComponent{
+export class LineBirdComponent {
   chart: any;
-  minuteInMilliseconds : number = 60000
+  minuteInMilliseconds: number = 60000
 
-  constructor(private service : BirdserviceService) {
+  constructor(private service: BirdserviceService) {
 
   }
   ngAfterViewInit() {
+    this.service.GetWeekData("17").subscribe(() => {
+      this.createChart()
+    })
     this.service.GetFirstChunkDate("17").subscribe((success: boolean) => {
       if (success) {
-        this.createChart();
-      } 
+        //this.createChart();
+      }
     });
 
     setInterval(() => {
-      this.service.GetLiveData("17").subscribe((succes : boolean) => {
-        if (succes){
-          this.chart.update()
+      this.service.GetLiveData("17").subscribe((succes: boolean) => {
+        if (succes) {
+          //this.chart.update()
         }
       })
-    },this.minuteInMilliseconds)
+    }, this.minuteInMilliseconds)
   }
+  dbaArr: number[] = []
+  timeArr: number[] = []
 
-  createChart(){
+  createChart() {
     this.chart = new Chart("canvasbird", {
-      type: 'line', 
+      type: 'line',
       data: {
-        labels: this.service.unixTimeStamp, 
-	       datasets: [
+        labels: this.timeArr,
+        datasets: [
           {
-            data:this.service.intervalDataDba,
-            borderColor : '#179ef6',
-            pointStyle:false,
-            
+            data: this.dbaArr,
+            borderColor: '#179ef6',
+            pointStyle: false,
+
           }
-         ]
+        ]
       },
-      options:{
-        maintainAspectRatio : false,
-        animation:false,
-        scales : {
-          x : {
-            ticks : {
+      options: {
+        maintainAspectRatio: false,
+        animation: false,
+        scales: {
+          x: {
+            ticks: {
               maxTicksLimit: 15,
-              color : "#5A1A84",
-              font : {
-                size : 15
+              color: "#5A1A84",
+              font: {
+                size: 15
               }
             }
           },
-          y : {
-            suggestedMin:55,
-            suggestedMax : 80,
-              
-            ticks : {
-              color : "#5A1A84",
-              font : {
-                size : 15
+          y: {
+            suggestedMin: 55,
+            suggestedMax: 80,
+
+            ticks: {
+              color: "#5A1A84",
+              font: {
+                size: 15
               }
             }
           },
         },
-        responsive : true,
-        plugins:{legend:{
-          display : false
-        }}
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
       }
     },
-  );
+    );
   }
 }
