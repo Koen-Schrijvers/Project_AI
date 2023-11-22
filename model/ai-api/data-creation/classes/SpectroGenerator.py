@@ -7,7 +7,6 @@ class SpectroGenerator:
         self.targetDir = targetDir
 
     def GenerateSpectros(self,df , time_window, step_size, figsize, category):
-        fig, ax = plt.subplots(1, 1, figsize=figsize)
         window = time_window*8
         step_size = 10
         num_iterations = (len(df) - window) // step_size
@@ -16,9 +15,10 @@ class SpectroGenerator:
             start_row = i * step_size
             end_row = start_row + window
             current_window = df.iloc[start_row:end_row]
-            self.spectro(current_window, ax, False, category)
+            self.spectro(current_window, figsize, False, category)
 
-    def spectro(self, df, ax, normalized, category):
+    def spectro(self, df, figsize, normalized, category):
+        fig, ax = plt.subplots(1, 1, figsize=figsize)
         terts_columns = df.loc[:, 'terts000197':'terts201587']
         terts_columns.columns = terts_columns.columns.str.replace('terts', '')
         terts_columns = terts_columns.iloc[:, ::-1]
@@ -32,4 +32,5 @@ class SpectroGenerator:
         plt.gca().set_axis_off()
         plt.margins(0,0)
         plt.savefig(f'{self.targetDir}/{category}/{category}.{self.index}.png',bbox_inches='tight',pad_inches = 0)
+        plt.close(fig)
         self.index += 1
