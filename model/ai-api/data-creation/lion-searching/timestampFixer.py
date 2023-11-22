@@ -39,7 +39,7 @@ def parse_filename(filename):
 
 def calculate_absolute_times(absolute_start, absolute_end, relative_start, relative_end):
     new_start = absolute_start + timedelta(seconds=relative_start)
-    new_end = absolute_start + timedelta(seconds=relative_end)
+    new_end = new_start + timedelta(seconds=relative_end)
     return new_start, new_end
 
 def format_new_filename(sensor_name, start, end, extension):
