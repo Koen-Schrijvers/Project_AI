@@ -10,7 +10,7 @@ class DataGenerator:
     token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzAwNDE5NzI2LCJleHAiOjE3MDMwMTE3MjZ9.mka3hJSZZxOEruZHS2bM1n447uqfV8OKOZozXIuUyHk"
     headers = {'Authorization': f'Bearer {token}'}
     categories = ("Lion", "Bird", "noBird","noLion")
-    def __init__(self, targetDir = "../data/unsorted", figSize = (5,5), window_time = 10, step_size = 2) -> None:
+    def __init__(self, targetDir = "../data/unsorted", figSize = (5,5), window_time = 10, step_size = 1) -> None:
         self.targetDir = targetDir
         self.figure_size = figSize
         self.window_time = window_time
@@ -44,7 +44,8 @@ class DataGenerator:
 
 
     def TimestampsToPNG(self, begin_date, end_date, node,category):
-
+        if begin_date.find("10-28") !=-1 or begin_date.find("10-29") != -1:
+            return
         unixStartTime = self.TurnDateIntoUnixTimestamp(begin_date)
         unixEndTime = self.TurnDateIntoUnixTimestamp(end_date)
 
@@ -62,7 +63,11 @@ class DataGenerator:
 
 
     def TurnDateIntoUnixTimestamp(self,date):
-        corrected_date = datetime.strptime(date, "%Y-%m-%d %H:%M:%S.%f") + timedelta(hours=2)
+        input_date = datetime.strptime(date, "%Y-%m-%d %H:%M:%S.%f")
+
+        reference_date = datetime(input_date.year, 10, 29)
+        corrected_date = (input_date + timedelta(hours=1)) if input_date > reference_date else (input_date + timedelta(hours=2))
+
         return corrected_date.timestamp()
 
 
