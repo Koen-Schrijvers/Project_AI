@@ -19,19 +19,9 @@ export class LineLionComponent implements AfterViewInit {
 
   }
   ngAfterViewInit() {
-    this.service.GetFirstChunkDate("27").subscribe((success: boolean) => {
-      if (success) {
-        //this.createChart();
-      }
-    });
 
-    setInterval(() => {
-      this.service.GetLiveData("27").subscribe((succes: boolean) => {
-        if (succes) {
-          //this.chart.update()
-        }
-      })
-    }, this.minuteInMilliseconds)
+
+
   }
   createChart() {
     this.chart = new Chart("canvas", {

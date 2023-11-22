@@ -17,22 +17,14 @@ export class LineBirdComponent {
 
   }
   ngAfterViewInit() {
-    this.service.GetWeekData("17").subscribe(() => {
-      this.createChart()
-    })
+
     this.service.GetFirstChunkDate("17").subscribe((success: boolean) => {
       if (success) {
-        //this.createChart();
+        this.createChart();
       }
     });
 
-    setInterval(() => {
-      this.service.GetLiveData("17").subscribe((succes: boolean) => {
-        if (succes) {
-          //this.chart.update()
-        }
-      })
-    }, this.minuteInMilliseconds)
+
   }
   dbaArr: number[] = []
   timeArr: number[] = []
@@ -41,10 +33,10 @@ export class LineBirdComponent {
     this.chart = new Chart("canvasbird", {
       type: 'line',
       data: {
-        labels: this.timeArr,
+        labels: this.service.unixTimeStamp,
         datasets: [
           {
-            data: this.dbaArr,
+            data: this.service.intervalDataDba,
             borderColor: '#179ef6',
             pointStyle: false,
 
@@ -57,7 +49,6 @@ export class LineBirdComponent {
         scales: {
           x: {
             ticks: {
-              maxTicksLimit: 15,
               color: "#5A1A84",
               font: {
                 size: 15
