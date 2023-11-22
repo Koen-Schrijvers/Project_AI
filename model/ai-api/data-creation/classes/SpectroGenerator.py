@@ -8,7 +8,6 @@ class SpectroGenerator:
 
     def GenerateSpectros(self,df , time_window, step_size, figsize, category):
         window = time_window*8
-        step_size = 10
         num_iterations = (len(df) - window) // step_size
 
         for i in range(num_iterations):
