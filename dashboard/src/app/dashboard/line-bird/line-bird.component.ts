@@ -18,16 +18,15 @@ export class LineBirdComponent {
   }
   ngAfterViewInit() {
 
-    this.service.GetFirstChunkDate("17").subscribe((success: boolean) => {
+    this.service.GetWeekData("17").subscribe((success: boolean) => {
       if (success) {
         this.createChart();
+        
       }
     });
 
 
   }
-  dbaArr: number[] = []
-  timeArr: number[] = []
 
   createChart() {
     this.chart = new Chart("canvasbird", {
