@@ -22,12 +22,6 @@ export class BirdserviceService {
     return localDate;
   }
 
- 
-
-
-  
-
-
   unixTimestampToTime(unixTimestamp: number): string {
     const milliseconds = unixTimestamp * 1000;
 
