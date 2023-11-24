@@ -1,42 +1,36 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
-import { Observable } from 'rxjs';
-import { AsasenseService } from 'src/services/asasense.service';
-import { BirdserviceService } from 'src/services/birdservice.service';
-import { dailyOject } from 'src/services/interfaces/dailyobject';
-import { LionserviceService } from 'src/services/lionservice.service';
+import { DayService } from 'src/services/day.service';
 
 @Component({
-  selector: 'app-line-lion',
-  templateUrl: './line-lion.component.html',
-  styleUrls: ['./line-lion.component.css']
+  selector: 'app-day-bird',
+  templateUrl: './day-bird.component.html',
+  styleUrls: ['./day-bird.component.css']
 })
-export class LineLionComponent implements AfterViewInit {
+export class DayBirdComponent implements OnInit {
+
   chart: any;
   minuteInMilliseconds: number = 60000
 
-  constructor(private service: LionserviceService) {
+  constructor(private service: DayService) { }
 
-  }
-  ngAfterViewInit() {
-
-    this.service.GetWeekData("27").subscribe((success: boolean) => {
+  ngOnInit(): void {
+    this.service.GetFirstChunkDate("17").subscribe((success: boolean) => {
       if (success) {
         this.createChart();
-        
       }
     });
-
   }
+
   createChart() {
-    this.chart = new Chart("canvas", {
+    this.chart = new Chart("daybird", {
       type: 'line',
       data: {
         labels: this.service.unixTimeStamp,
         datasets: [
           {
             data: this.service.intervalDataDba,
-            borderColor: '#fb991a',
+            borderColor: '#179ef6',
             pointStyle: false,
 
           }
@@ -44,11 +38,11 @@ export class LineLionComponent implements AfterViewInit {
       },
       options: {
         maintainAspectRatio: false,
+        animation: false,
         scales: {
           x: {
             ticks: {
-              maxTicksLimit: 15,
-              color: "#b6012f",
+              color: "#5A1A84",
               font: {
                 size: 15
               }
@@ -58,7 +52,7 @@ export class LineLionComponent implements AfterViewInit {
             suggestedMin: 40,
             suggestedMax: 70,
             ticks: {
-              color: "#b6012f",
+              color: "#5A1A84",
               font: {
                 size: 15
               }

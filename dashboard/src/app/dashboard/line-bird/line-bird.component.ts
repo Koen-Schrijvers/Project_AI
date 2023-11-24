@@ -25,7 +25,7 @@ export class LineBirdComponent {
       }
     });
 
-
+    
   }
 
   createChart() {
@@ -55,9 +55,8 @@ export class LineBirdComponent {
             }
           },
           y: {
-            suggestedMin: 55,
-            suggestedMax: 80,
-
+            suggestedMin: 40,
+            suggestedMax: 70,
             ticks: {
               color: "#5A1A84",
               font: {

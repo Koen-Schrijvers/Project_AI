@@ -13,7 +13,7 @@ export class BirdserviceService {
   }
 
   //need for every call
-  private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTcsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNjk4MjI4MDg0LCJleHAiOjE3MDA4MjAwODR9.cVSrc8FdKFIhq965BIRepuJVjKT-6iRCM8GssTBUts0"
+  private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzAwNDE5NzI2LCJleHAiOjE3MDMwMTE3MjZ9.mka3hJSZZxOEruZHS2bM1n447uqfV8OKOZozXIuUyHk"
   private headers = { 'Authorization': this.jwtToke }
   convertUtcToLocal(hours: number = 1): Date {
     const utcDate = new Date();
@@ -31,7 +31,7 @@ export class BirdserviceService {
     const hours = date.getHours();
     const minutes = date.getMinutes();
 
-    const formattedTime = `${day.toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    const formattedTime = `${day.toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 
     return formattedTime;
   }
@@ -44,7 +44,7 @@ export class BirdserviceService {
   GetWeekData(nodeNumber: string) {
     let endTimestamp = Date.now() / 1000;
     let startTimestamp = endTimestamp - (24 * 60 * 60);
-    const amountDays = 7
+    const amountDays = 1
     const observ = []
     for (let index = 0; index < amountDays; index++) {
       observ.push(this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers }))

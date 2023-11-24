@@ -19,6 +19,8 @@ import { LineBirdComponent } from './dashboard/line-bird/line-bird.component';
 import { BarChartComponent } from './dashboard/bar-chart/bar-chart.component';
 import { LineLionComponent } from './dashboard/line-lion/line-lion.component';
 import { MapsensorComponent } from './dashboard/mapsensor/mapsensor.component';
+import { DayBirdComponent } from './dashboard/day-bird/day-bird.component';
+import { DayLionComponent } from './dashboard/day-lion/day-lion.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { MapsensorComponent } from './dashboard/mapsensor/mapsensor.component';
     LineBirdComponent,
     BarChartComponent,
     LineLionComponent,
-    MapsensorComponent
+    MapsensorComponent,
+    DayBirdComponent,
+    DayLionComponent
   ],
   imports: [
     BrowserModule,
