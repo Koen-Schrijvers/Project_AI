@@ -13,11 +13,14 @@
 }
 .grid-container {
     display: grid;
-    grid-template-columns: 0.2fr 1fr 1fr 1fr; 
+    grid-template-columns: 0.3fr 1fr 1fr 1fr 0.2fr; 
     grid-template-rows: 0.5fr 0.5fr;
     width: 100%;
     height: 100%;
+    justify-content: center; 
+    align-items: center;
 }
+
 
 #lion{
     grid-column: 2 /span 2;
@@ -38,18 +41,30 @@
     grid-column: 4;
     grid-row: 2;
 }
-#bar{
+
+#logo{
+    grid-column: 5;
+    grid-row: 1 /span 2;
+}
+
+#logo img{
+    width: 100%;
+    height: auto;
+
+    border-radius: 1rem;
+}
+#nebalk{
     grid-column: 1;
     grid-row: 1 /span 2;
+ 
+}
 
-    width: 50%;
-    height: 80%;
-    background-color: #efddb3;
-    border-radius: 10px;
-    padding: 3px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    grid-row: 1;
-    margin: 200% 0 50% auto;
+.flex-container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 2.5rem;
 }
 .column {
     padding: 0px 20px 0px 20px; 
@@ -59,6 +74,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    
 }
 
 .map{
@@ -68,11 +84,11 @@
 }
 .profile-container {
     display: flex;
-    /*flex-direction: column;*/
     flex-direction: row;
-    justify-content: center;
-    align-items: center; 
-    padding: 20px;
+    /*flex-direction: row;*/
+    justify-content: space-evenly;
+    height: 25%;
+    align-items: center;
     /*background-color: rgba(202, 26, 26, 0.8);*/
     font-family: 'Oswald', sans-serif;
     font-family: 'Roboto Condensed', sans-serif;
@@ -86,18 +102,19 @@
     text-align: center; 
     background-color: white;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); 
-    border: 10px solid #8F5600
+    border: 10px solid #8c0225
 }
 
 #lion-head{
     background-image: url('/assets/lion.png'); 
     background-size: cover;
+    margin-bottom: 2rem;
 }
 #parrot-head{
     background-image: url('/assets/parrot.png'); 
     background-size: 125%;
     border:10px solid #179ef6;
-
+    margin-top: 2rem;
 }
 .AI-container{
     height: 15%;
@@ -117,25 +134,28 @@
     margin-top: 0%;
 }
 .line{
-    width: 100%;
+    width: 95%;
     height: 100%;
     border-radius: 10px;
     padding: 3px;
     box-sizing: border-box;
-
+    margin: auto;
 }
 
-
+.week{
+    width: 95%;
+    margin-right: 0;
+}
 
 .bar{
     width: 100%;
-    height: 50%;
+    min-height: 25rem;
     background-color: #efddb3;
     border-radius: 10px;
     padding: 3px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    grid-row: 1;
-    margin-top: 18rem;
+ 
+
 }
 .logo-container{
     margin-left: 20px;

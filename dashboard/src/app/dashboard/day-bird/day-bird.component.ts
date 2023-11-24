@@ -42,7 +42,7 @@ export class DayBirdComponent implements OnInit {
         scales: {
           x: {
             ticks: {
-              color: "#5A1A84",
+              color: "#0A2463",
               font: {
                 size: 15
               }
@@ -52,7 +52,7 @@ export class DayBirdComponent implements OnInit {
             suggestedMin: 40,
             suggestedMax: 70,
             ticks: {
-              color: "#5A1A84",
+              color: "#0A2463",
               font: {
                 size: 15
               }

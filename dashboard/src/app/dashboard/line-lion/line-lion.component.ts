@@ -36,7 +36,7 @@ export class LineLionComponent implements AfterViewInit {
         datasets: [
           {
             data: this.service.intervalDataDba,
-            borderColor: '#fb991a',
+            borderColor: '#8c0225',
             pointStyle: false,
 
           }

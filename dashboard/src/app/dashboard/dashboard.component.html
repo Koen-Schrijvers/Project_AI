@@ -3,37 +3,50 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto+Condensed:wght@600&display=swap" rel="stylesheet">
 <div class="background-container">
     <div class="grid-container">
-        <div class="row" id="bar">
-            <app-bar-chart></app-bar-chart>
+        <div class="row" id="nebalk">
+            <div class="flex-container">
+                <div class="profile-container">
+                    <div class="profile" id="lion-head"></div>
+                </div>
+                <div class="bar">
+                    <app-bar-chart></app-bar-chart>
+                </div>
+                <div class="profile-container">
+                    <div class="profile" id="parrot-head"></div>
+                </div>
+            </div>
         </div>  
-        <div class="row" id="lion">
+        <div class="row centercolumn" id="lion">
             <div class="content-container">
-                <div class="line">
+                <div class="line week">
                     <app-line-lion></app-line-lion>
                 </div>
             </div>
         </div>  
-        <div class="row" id="parrot">
+        <div class="row centercolumn" id="parrot">
             <div class="content-container">
-                <div class="line">
+                <div class="line week">
                     <app-line-bird></app-line-bird>
                 </div>
             </div>
         </div>
-        <div class="row" id="lion-day">
+        <div class="row centercolumn" id="lion-day">
             <div class="content-container">
-                <div class="line">
+                <div class="line ">
                     <app-day-lion></app-day-lion>
                 </div>
             </div>
         </div>
-        <div class="row" id="bird-day">
+        <div class="row centercolumn" id="bird-day">
             <div class="content-container">
                 <div class="line">
                     <app-day-bird></app-day-bird>
                 </div>
             </div>
         </div>
+        <div class="row" id="logo">
+            <img src="../../assets/De Oorzaak is een initiatief van (250 x 1500 px) (1).png"> 
+        </div> 
     </div> 
     
 </div>

@@ -29,7 +29,7 @@ export class DayLionComponent implements OnInit {
         datasets: [
           {
             data: this.service.intervalDataDba,
-            borderColor: '#fb991a',
+            borderColor: '#8c0225',
             pointStyle: false,
             borderWidth : 1
           }
