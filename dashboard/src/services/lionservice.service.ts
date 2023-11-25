@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { dataObject } from './interfaces/dataObject';
-import { Observable, catchError, forkJoin, map, of } from 'rxjs';
+import { Observable, Subject, catchError, forkJoin, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,12 @@ export class LionserviceService {
   //need for every call
   private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzAwNDE5NzI2LCJleHAiOjE3MDMwMTE3MjZ9.mka3hJSZZxOEruZHS2bM1n447uqfV8OKOZozXIuUyHk"
   private headers = { 'Authorization': this.jwtToke }
+  
+  private completionSubject = new Subject<boolean>();
+
+  getCompletionObservable(): Observable<boolean> {
+    return this.completionSubject.asObservable();
+  }
 
   convertUtcToLocal(hours: number = 1): Date {
     const utcDate = new Date();
@@ -37,6 +43,7 @@ export class LionserviceService {
         this.intervalDataTime = response.data[0];
         this.unixTimeStamp = this.intervalDataTime.map(e => this.unixTimestampToTime(e))
         this.intervalDataDba = response.data[1];
+
         return true;
       }));
   }
@@ -118,10 +125,10 @@ export class LionserviceService {
         
           const arrayUnix = data.tijdArr;
           const arrayDba = data.avgDba;
-          console.log("dag: " + index + +"  " + arrayUnix.map(e => this.unixTimestampToTime(e)))
           this.intervalDataDba.unshift(...arrayDba);
           this.unixTimeStamp.unshift(...arrayUnix.map(e => this.unixTimestampToTime(e)))
         });
+        this.completionSubject.next(true);
         return true; // Assuming success if we reach here
       }),
       catchError(error => {

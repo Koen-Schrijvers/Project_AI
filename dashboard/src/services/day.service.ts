@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, Subject, map } from 'rxjs';
 import { dataObject } from './interfaces/dataObject';
 
 @Injectable({
@@ -16,6 +16,11 @@ export class DayService {
   private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzAwNDE5NzI2LCJleHAiOjE3MDMwMTE3MjZ9.mka3hJSZZxOEruZHS2bM1n447uqfV8OKOZozXIuUyHk"
   private headers = { 'Authorization': this.jwtToke }
 
+  private completionSubject = new Subject<boolean>();
+
+  getCompletionObservable(): Observable<boolean> {
+    return this.completionSubject.asObservable();
+  }
 
   public intervalDataTime: number[] = []
   public unixTimeStamp: string[] = []
@@ -23,13 +28,15 @@ export class DayService {
   
   GetFirstChunkDate(nodeNumber: string): Observable<boolean> {
     const endTimestamp = Math.floor(Date.now() / 1000); // Using Math.floor to ensure an integer value
-    const startTimestamp = endTimestamp - (1 * 60 * 60);
+    const startTimestamp = new Date().setHours(5,0,0) / 1000
 
     return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
       .pipe(map(response => {
         this.intervalDataTime = response.data[0];
         this.unixTimeStamp = this.intervalDataTime.map(e => this.unixTimestampToTime(e))
         this.intervalDataDba = response.data[1];
+
+        this.completionSubject.next(true);
         return true;
       }));
   }

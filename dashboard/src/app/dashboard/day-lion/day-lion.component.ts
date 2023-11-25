@@ -20,6 +20,7 @@ export class DayLionComponent implements OnInit {
         this.createChart();
       }
     });
+    
   }
   createChart() {
     this.chart = new Chart("daylion", {

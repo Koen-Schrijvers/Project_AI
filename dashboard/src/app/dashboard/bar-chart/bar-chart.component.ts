@@ -22,39 +22,42 @@ export class BarChartComponent implements OnInit{
   constructor(private asasense: AsasenseService) {}
 
   ngOnInit(): void {
-    this.asasense.GetLastMinuteByNode("17").subscribe((response) => {
-      this.lastMinuteBirds = response.data[1]
-    })
-    this.asasense.GetLastMinuteByNode("27").subscribe((response) => {
-      this.lastMinuteLions = response.data[1]
-    })
-    //refresh data every minute
-    setInterval(() => {
-      console.log("ophaal moment")
-      
+    setTimeout(() => {
       this.asasense.GetLastMinuteByNode("17").subscribe((response) => {
-
         this.lastMinuteBirds = response.data[1]
-        this.currentIndexBirds=0
       })
       this.asasense.GetLastMinuteByNode("27").subscribe((response) => {
         this.lastMinuteLions = response.data[1]
-        this.currentIndexLions=0
       })
-    }, 60000)
-
-    setInterval(()=>{
-      //update arrow 
-      this.updateArrowPosition(this.lastMinuteLions[this.currentIndexLions], this.lastMinuteBirds[this.currentIndexBirds] )
-      this.currentIndexLions++
-      this.currentIndexBirds++
-      if(this.currentIndexBirds >= this.lastMinuteBirds.length){
-        this.currentIndexBirds = this.lastMinuteBirds.length-1
-      }
-      if(this.currentIndexLions >= this.lastMinuteLions.length){
-        this.currentIndexLions = this.lastMinuteLions.length-1
-      }
-    },125)
+      //refresh data every minute
+      setInterval(() => {
+        console.log("ophaal moment")
+        
+        this.asasense.GetLastMinuteByNode("17").subscribe((response) => {
+  
+          this.lastMinuteBirds = response.data[1]
+          this.currentIndexBirds=0
+        })
+        this.asasense.GetLastMinuteByNode("27").subscribe((response) => {
+          this.lastMinuteLions = response.data[1]
+          this.currentIndexLions=0
+        })
+      }, 60000)
+  
+      setInterval(()=>{
+        //update arrow 
+        this.updateArrowPosition(this.lastMinuteLions[this.currentIndexLions], this.lastMinuteBirds[this.currentIndexBirds] )
+        this.currentIndexLions++
+        this.currentIndexBirds++
+        if(this.currentIndexBirds >= this.lastMinuteBirds.length){
+          this.currentIndexBirds = this.lastMinuteBirds.length-1
+        }
+        if(this.currentIndexLions >= this.lastMinuteLions.length){
+          this.currentIndexLions = this.lastMinuteLions.length-1
+        }
+      },125)
+    }, 120000);
+    
   }
 
   updateArrowPosition(Lions_dBA: number, Birds_dBA: number): void {
