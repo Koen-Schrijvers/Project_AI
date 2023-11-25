@@ -1,9 +1,10 @@
 .background-container {
-    background-image: url('/assets/jungle-background.png'); 
+    background-image: url('/assets/jungle_1.png'); 
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    background-color: rgba(190, 136, 20, 0.3);
+    background-color: #E8F5FD;
+    /*background-color: rgba(190, 136, 20, 0.3);*/
     position: absolute;
     top: 0;
     left: 0;
