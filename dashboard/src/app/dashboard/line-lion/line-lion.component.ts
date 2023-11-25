@@ -15,18 +15,19 @@ export class LineLionComponent implements AfterViewInit {
   chart: any;
   minuteInMilliseconds: number = 60000
 
-  constructor(private service: LionserviceService) {
+  constructor(private service: LionserviceService, private birdservice : BirdserviceService) {
 
   }
   ngAfterViewInit() {
 
-    this.service.GetWeekData("27").subscribe((success: boolean) => {
-      if (success) {
-        this.createChart();
-        
-      }
+    this.birdservice.getCompletionObservable().subscribe((outerSuccess) => {
+      this.service.GetWeekData("27").subscribe((innerSuccess: boolean) => {
+        if (innerSuccess) {
+          this.createChart();
+        }
+      });
     });
-
+  
   }
   createChart() {
     this.chart = new Chart("canvas", {
