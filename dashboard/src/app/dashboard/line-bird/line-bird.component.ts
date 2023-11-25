@@ -48,6 +48,7 @@ export class LineBirdComponent {
         scales: {
           x: {
             ticks: {
+              maxTicksLimit : 7,
               color: "#0A2463",
               font: {
                 size: 15
@@ -55,8 +56,17 @@ export class LineBirdComponent {
             }
           },
           y: {
+            max : 80,
+            title: {
+              display: true,
+              text: 'dBA',
+              color : "#000000",
+              font : {
+                size : 15,
+                weight : "bold",
+              }
+          },
             suggestedMin: 40,
-            suggestedMax: 70,
             ticks: {
               color: "#0A2463",
               font: {

@@ -44,7 +44,7 @@ export class BirdserviceService {
   GetWeekData(nodeNumber: string) {
     let endTimestamp = Date.now() / 1000;
     let startTimestamp = endTimestamp - (24 * 60 * 60);
-    const amountDays = 1
+    const amountDays = 7
     const observ = []
     for (let index = 0; index < amountDays; index++) {
       observ.push(this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers }))

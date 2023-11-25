@@ -76,10 +76,11 @@ export class LionserviceService {
 
     const date = new Date(milliseconds);
 
+    const day = date.getDate();
     const hours = date.getHours();
     const minutes = date.getMinutes();
 
-    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    const formattedTime = `${day.toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 
     return formattedTime;
   }
@@ -101,7 +102,7 @@ export class LionserviceService {
   GetWeekData(nodeNumber: string) {
     let endTimestamp = Date.now() / 1000;
     let startTimestamp = endTimestamp - (24 * 60 * 60);
-    const amountDays = 1
+    const amountDays = 7
     const observ = []
     for (let index = 0; index < amountDays; index++) {
       observ.push(this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers }))

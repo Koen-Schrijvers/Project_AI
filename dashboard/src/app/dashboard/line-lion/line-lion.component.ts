@@ -44,10 +44,11 @@ export class LineLionComponent implements AfterViewInit {
       },
       options: {
         maintainAspectRatio: false,
+        animation: false,
         scales: {
           x: {
             ticks: {
-              maxTicksLimit: 15,
+              maxTicksLimit: 7,
               color: "#b6012f",
               font: {
                 size: 15
@@ -55,8 +56,18 @@ export class LineLionComponent implements AfterViewInit {
             }
           },
           y: {
+            max : 80,
+            title: {
+              display: true,
+              text: 'dBA',
+              color : "#000000",
+              font : {
+                size : 15,
+                weight : "bold",
+              }
+          },
             suggestedMin: 40,
-            suggestedMax: 70,
+            suggestedMax: 80,
             ticks: {
               color: "#b6012f",
               font: {

@@ -32,7 +32,7 @@ export class DayBirdComponent implements OnInit {
             data: this.service.intervalDataDba,
             borderColor: '#179ef6',
             pointStyle: false,
-
+            borderWidth : 1
           }
         ]
       },
@@ -49,8 +49,17 @@ export class DayBirdComponent implements OnInit {
             }
           },
           y: {
-            suggestedMin: 40,
-            suggestedMax: 70,
+            min : 40,
+            max : 90,
+            title: {
+              display: true,
+              text: 'dBA',
+              color : "#000000",
+              font : {
+                size : 15,
+                weight : "bold",
+              }
+          },
             ticks: {
               color: "#0A2463",
               font: {

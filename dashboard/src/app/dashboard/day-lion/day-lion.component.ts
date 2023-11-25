@@ -48,6 +48,17 @@ export class DayLionComponent implements OnInit {
             }
           },
           y: {
+            min : 40,
+            max : 90,
+            title: {
+              display: true,
+              text: 'dBA',
+              color : "#000000",
+              font : {
+                size : 15,
+                weight : "bold",
+              }
+          },
             suggestedMin: 40,
             suggestedMax: 70,
             ticks: {
