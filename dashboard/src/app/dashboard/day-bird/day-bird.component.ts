@@ -18,6 +18,12 @@ export class DayBirdComponent implements OnInit {
     this.service.GetFirstChunkDate("17").subscribe((success: boolean) => {
       if (success) {
         this.createChart();
+
+        setInterval(() => {
+          this.service.GetLiveData("17").subscribe((success: boolean) => {
+            this.chart.update();
+          })
+        },this.minuteInMilliseconds)
       }
     });
   }
