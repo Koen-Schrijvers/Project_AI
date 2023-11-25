@@ -11,6 +11,7 @@ export class DayBirdComponent implements OnInit {
 
   chart: any;
   minuteInMilliseconds: number = 60000
+  updateInterval: number = 5 * this.minuteInMilliseconds; // 5 minutes in milliseconds
 
   constructor(private service: DayService) { }
 
@@ -21,9 +22,13 @@ export class DayBirdComponent implements OnInit {
 
         setInterval(() => {
           this.service.GetLiveData("17").subscribe((success: boolean) => {
-            this.chart.update();
+            if (success){
+              this.chart.update();
+              console.log("vogels update")
+            }
+    
           })
-        },this.minuteInMilliseconds)
+        },this.updateInterval)
       }
     });
   }
