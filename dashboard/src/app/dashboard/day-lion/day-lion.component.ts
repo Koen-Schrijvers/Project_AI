@@ -11,6 +11,7 @@ export class DayLionComponent implements OnInit {
 
   chart: any;
   minuteInMilliseconds: number = 60000
+  updateInterval: number = 5 * this.minuteInMilliseconds; // 5 minutes in milliseconds
 
   constructor(private service: DayService) { }
 
@@ -20,10 +21,13 @@ export class DayLionComponent implements OnInit {
         this.createChart();
 
         setInterval(() => {
-          this.service.GetLiveData("17").subscribe((success: boolean) => {
-            this.chart.update();
+          this.service.GetLiveData("27").subscribe((success: boolean) => {
+            if(success){
+              this.chart.update();
+              console.log("leeuwen update")
+            }
           })
-        },this.minuteInMilliseconds)
+        },this.updateInterval)
       }
     });
     

@@ -43,7 +43,7 @@ export class DayService {
 
   GetLiveData(nodeNumber: string): Observable<boolean> {
     const endTimestamp = Date.now() / 1000;
-    const intervalInSeconds = 60;
+    const intervalInSeconds = 5 * 60;
     const startTimestamp = endTimestamp - intervalInSeconds;
 
     return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
