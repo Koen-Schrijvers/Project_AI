@@ -24,17 +24,28 @@ export class DayService {
 
   public intervalDataTime: number[] = []
   public unixTimeStamp: string[] = []
-  public intervalDataDba: number[] = []
-  
+  public unixTimeStampLion: string[] = []
+  public unixTimeStampBird: string[] = []
+  public intervalDataDba: number[] = [] // maar 1 var voor beide?
+  public intervalDataDbaBird: number[] = []
+  public intervalDataDbaLion: number[] = []
   GetFirstChunkDate(nodeNumber: string): Observable<boolean> {
     const endTimestamp = Math.floor(Date.now() / 1000); // Using Math.floor to ensure an integer value
     const startTimestamp = new Date().setHours(5,0,0) / 1000
 
     return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
       .pipe(map(response => {
-        this.intervalDataTime = response.data[0];
-        this.unixTimeStamp = this.intervalDataTime.map(e => this.unixTimestampToTime(e))
-        this.intervalDataDba = response.data[1];
+        let intervalDataTime: number[] = response.data[0]
+        if (nodeNumber == "17") {
+          this.intervalDataDbaBird = response.data[1]
+          this.unixTimeStampBird = intervalDataTime.map(e => this.unixTimestampToTime(e))
+        }
+        else {
+          this.intervalDataDbaLion = response.data[1]
+          this.unixTimeStampLion = intervalDataTime.map(e => this.unixTimestampToTime(e))
+        }
+        //this.unixTimeStamp = this.intervalDataTime.map(e => this.unixTimestampToTime(e))
+        //this.intervalDataDba = response.data[1];
 
         this.completionSubject.next(true);
         return true;
@@ -43,15 +54,20 @@ export class DayService {
 
   GetLiveData(nodeNumber: string): Observable<boolean> {
     const endTimestamp = Date.now() / 1000;
-    const intervalInSeconds = 5 * 60;
+    const intervalInSeconds = 4 * 60;
     const startTimestamp = endTimestamp - intervalInSeconds;
 
     return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
       .pipe(map(response => {
-
-        this.intervalDataTime = response.data[0];
-        this.unixTimeStamp.push(...this.intervalDataTime.map(e => this.unixTimestampToTime(e)))
-        this.intervalDataDba.push(...response.data[1]);
+        let intervalDataTime: number[] = response.data[0]
+        if (nodeNumber == "17") {
+          this.intervalDataDbaBird.push(...response.data[1]);
+          this.unixTimeStampBird.push(...intervalDataTime.map(e => this.unixTimestampToTime(e)))
+        }
+        else {
+          this.intervalDataDbaLion.push(...response.data[1]);
+          this.unixTimeStampLion.push(...intervalDataTime.map(e => this.unixTimestampToTime(e)))
+        }
 
         return true;
       }));

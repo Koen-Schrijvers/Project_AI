@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart } from 'chart.js';
+import { Chart } from 'chart.js/auto';
 import { DayService } from 'src/services/day.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class DayBirdComponent implements OnInit {
 
   chart: any;
   minuteInMilliseconds: number = 60000
-  updateInterval: number = 5 * this.minuteInMilliseconds; // 5 minutes in milliseconds
+  updateInterval: number = 4 * this.minuteInMilliseconds; // 5 minutes in milliseconds
 
   constructor(private service: DayService) { }
 
@@ -37,10 +37,10 @@ export class DayBirdComponent implements OnInit {
     this.chart = new Chart("daybird", {
       type: 'line',
       data: {
-        labels: this.service.unixTimeStamp,
+        labels: this.service.unixTimeStampBird,
         datasets: [
           {
-            data: this.service.intervalDataDba,
+            data: this.service.intervalDataDbaBird,
             borderColor: '#179ef6',
             pointStyle: false,
             borderWidth : 1
@@ -52,6 +52,7 @@ export class DayBirdComponent implements OnInit {
         animation: false,
         scales: {
           x: {
+            type: 'category',
             ticks: {
               color: "#0A2463",
               font: {

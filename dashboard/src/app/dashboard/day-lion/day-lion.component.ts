@@ -11,7 +11,7 @@ export class DayLionComponent implements OnInit {
 
   chart: any;
   minuteInMilliseconds: number = 60000
-  updateInterval: number = 5 * this.minuteInMilliseconds; // 5 minutes in milliseconds
+  updateInterval: number = 4 * this.minuteInMilliseconds; // 5 minutes in milliseconds
 
   constructor(private service: DayService) { }
 
@@ -36,10 +36,10 @@ export class DayLionComponent implements OnInit {
     this.chart = new Chart("daylion", {
       type: 'line',
       data: {
-        labels: this.service.unixTimeStamp,
+        labels: this.service.unixTimeStampLion,
         datasets: [
           {
-            data: this.service.intervalDataDba,
+            data: this.service.intervalDataDbaLion,
             borderColor: '#8c0225',
             pointStyle: false,
             borderWidth : 1
