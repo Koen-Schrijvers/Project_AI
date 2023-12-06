@@ -47,6 +47,8 @@ class Model:
         validation_data=self.validation_dataset,
         callbacks=callbacks
     )
+    def Save(self, name):
+        self.model.save(name, save_format="tf")
 
     def Model_evaluate(self):
         test_model = k.models.load_model(f"{self.targetDir}/{self.type}-model.keras")
