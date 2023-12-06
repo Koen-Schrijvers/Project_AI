@@ -31,7 +31,7 @@ export class DayService {
   public intervalDataDbaLion: number[] = []
   GetFirstChunkDate(nodeNumber: string): Observable<boolean> {
     const endTimestamp = Math.floor(Date.now() / 1000); // Using Math.floor to ensure an integer value
-    const startTimestamp = new Date().setHours(5,0,0) / 1000
+    const startTimestamp = new Date((new Date().getTime() - (10 * 24 * 60 * 60 * 1000))).setHours(5,0,0) / 1000
 
     return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
       .pipe(map(response => {

@@ -23,7 +23,7 @@ export class BirdserviceService {
   }
   
   convertUtcToLocal(hours: number = 1): Date {
-    const utcDate = new Date();
+    const utcDate = new Date((new Date().getTime() - (10 * 24 * 60 * 60 * 1000)));
     const localDate = new Date((utcDate.getTime() - (hours * 60 * 60 * 1000)) / 1000);
 
     return localDate;

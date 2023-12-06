@@ -22,7 +22,9 @@ export class AsasenseService {
   private unixStartTest: string = '1698136636'
   private unixEndTest: string = '1698316451'
 
-  private currentDate: Date = new Date()
+  private currentDate: Date = new Date(new Date().getTime() - (10 * 24 * 60 * 60 * 1000));
+
+
 
   GetDataWithUnixTime(unixStartTime: string = this.unixStartTest, unixEndTime: string = this.unixEndTest) {
     this.httpClient.get<any>(`https://api-new.asasense.com/ambient/node/17/measurements/${unixStartTime}/${unixEndTime}`, { headers: this.headers })
@@ -36,7 +38,7 @@ export class AsasenseService {
   }
 
   GetLastMinuteByNode(node: string): Observable<any> {
-    const lastMinute = new Date().getTime() / 1000
+    const lastMinute = (new Date().getTime() - (10 * 24 * 60 * 60 * 1000)) / 1000
     const minuteBefore = lastMinute - 120
     
     try{
@@ -47,7 +49,7 @@ export class AsasenseService {
     }
   }
   GetLastMinute(): Observable<any> {
-    const lastMinute = new Date().getTime() / 1000
+    const lastMinute = (new Date(new Date().getTime() - (10 * 24 * 60 * 60 * 1000)).getTime()) / 1000;
     const minuteBefore = lastMinute - 120
     
     try{
@@ -78,7 +80,7 @@ export class AsasenseService {
   }
 
   get StartDayUnix() {
-    var beginDate = new Date()
+    var beginDate = new Date((new Date().getTime() - (10 * 24 * 60 * 60 * 1000)))
     beginDate.setHours(2, 0, 0)
     return Math.floor(beginDate.getTime() / 1000);
   }

@@ -12,7 +12,7 @@ export class StatsblockComponent implements OnInit {
 
   constructor(private asasense: AsasenseService) { }
 
-  currentdate: Date = new Date()
+  currentdate: Date = new Date((new Date().getTime() - (10 * 24 * 60 * 60 * 1000)))
 
   months = [
     "January", "February", "March", "April", "May", "June",
