@@ -35,7 +35,7 @@ export class LionserviceService {
 
 
   GetFirstChunkDate(nodeNumber: string): Observable<boolean> {
-    const endTimestamp = Math.floor(Date.now() / 1000); // Using Math.floor to ensure an integer value
+    const endTimestamp = Math.floor((Date.now()- (10 * 24 * 60 * 60 * 1000)) / 1000); // Using Math.floor to ensure an integer value
     const startTimestamp = endTimestamp - (2 * 60 * 60);
 
     return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
@@ -49,7 +49,7 @@ export class LionserviceService {
   }
 
   GetLiveData(nodeNumber: string): Observable<boolean> {
-    const endTimestamp = Date.now() / 1000;
+    const endTimestamp = ((Date.now() - (10 * 24 * 60 * 60 * 1000)) / 1000);
     const intervalInSeconds = 60;
     const startTimestamp = endTimestamp - intervalInSeconds;
 
@@ -107,8 +107,8 @@ export class LionserviceService {
 
 
   GetWeekData(nodeNumber: string) {
-    let endTimestamp = Date.now() / 1000;
-    let startTimestamp = endTimestamp - (24 * 60 * 60);
+    let endTimestamp = (Date.now() - (10 * 24 * 60 * 60 * 1000)) / 1000;
+    let startTimestamp = endTimestamp - (24 * 60 * 60) - (10 * 24 * 60 * 60 * 1000);
     const amountDays = 7
     const observ = []
     for (let index = 0; index < amountDays; index++) {
