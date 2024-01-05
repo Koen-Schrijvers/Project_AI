@@ -8,14 +8,23 @@ import requests
 from io import StringIO 
 
 
-token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzAwNDE5NzI2LCJleHAiOjE3MDMwMTE3MjZ9.mka3hJSZZxOEruZHS2bM1n447uqfV8OKOZozXIuUyHk"
+
+# Global variable to keep track of the "current" datetime
+current_datetime = datetime.strptime("2023-10-02 00:00:00.000", "%Y-%m-%d %H:%M:%S.%f")
+
+print("ASAsenseService.py loaded, time set to: ", current_datetime)
+
+
+
+token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzA0NDE3MTU2LCJleHAiOjE3MDcwMDkxNTZ9.k1-RP99I_ZnzPNUUe2s3uKdL1cAB5famFQx0C9YxhH8"
 headers = {'Authorization': f'Bearer {token}'}
 
 def GetLatest80Value(node):
+    global current_datetime
 
-    current_datetime = datetime.now()
     current_timestamp = int(current_datetime.timestamp())
-    earlier_timestamp = int(current_datetime.timestamp()-180)
+    earlier_timestamp = int(current_timestamp - 10)  # 10 seconds earlier
+
     print(current_datetime)
 
     url = f"https://api-new.asasense.com/ambient/node/{node}/export/{earlier_timestamp}/{current_timestamp}/csv"
@@ -26,10 +35,13 @@ def GetLatest80Value(node):
         csv_data = StringIO(csv_data)
         df = pd.read_csv(csv_data, sep=",")
         print(df.shape[0])
-        last80 = df.tail(80)
-        spectro(last80,False, node)
-        return GetFirstAndLastTimestamp(last80)
-        
+        spectro(df, False, node)  # Directly use df, as it should have 80 values
+        timestamps = GetFirstAndLastTimestamp(df)
+
+        # Increment the global datetime by 10 seconds for the next call
+        current_datetime += timedelta(seconds=10)
+
+        return timestamps
     else:
         print(f"Error: {response.status_code}")
         print(response.text)
