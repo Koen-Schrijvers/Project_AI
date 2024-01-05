@@ -10,7 +10,7 @@ from io import StringIO
 
 
 # Global variable to keep track of the "current" datetime
-current_datetime = datetime.strptime("2023-10-02 00:00:00.000", "%Y-%m-%d %H:%M:%S.%f")
+current_datetime = datetime.strptime("2023-10-02 02:00:00.000", "%Y-%m-%d %H:%M:%S.%f")
 
 print("ASAsenseService.py loaded, time set to: ", current_datetime)
 
@@ -25,7 +25,8 @@ def GetLatest80Value(node):
     current_timestamp = int(current_datetime.timestamp())
     earlier_timestamp = int(current_timestamp - 10)  # 10 seconds earlier
 
-    print(current_datetime)
+    print("current_datetime: " + str(current_datetime))
+
 
     url = f"https://api-new.asasense.com/ambient/node/{node}/export/{earlier_timestamp}/{current_timestamp}/csv"
     response = requests.get(url, headers=headers)
@@ -34,7 +35,7 @@ def GetLatest80Value(node):
         csv_data = response.content.decode('utf-8')
         csv_data = StringIO(csv_data)
         df = pd.read_csv(csv_data, sep=",")
-        print(df.shape[0])
+        #print(df.shape[0])
         spectro(df, False, node)  # Directly use df, as it should have 80 values
         timestamps = GetFirstAndLastTimestamp(df)
 
@@ -62,6 +63,7 @@ def spectro(df, normalized, node):
     plt.gca().set_axis_off()
     plt.margins(0,0)
     plt.savefig(f'latest_from_node{node}.png',bbox_inches='tight',pad_inches = 0)
+    plt.close(fig)  # Close the figure after saving
 
 def GetFirstAndLastTimestamp(df):
     last_timestamp = df['timestamp'].iloc[-1]
