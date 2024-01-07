@@ -13,7 +13,7 @@ export class DayService {
   }
 
   //need for every call
-  private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzAwNDE5NzI2LCJleHAiOjE3MDMwMTE3MjZ9.mka3hJSZZxOEruZHS2bM1n447uqfV8OKOZozXIuUyHk"
+  private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzA0NDE3MTU2LCJleHAiOjE3MDcwMDkxNTZ9.k1-RP99I_ZnzPNUUe2s3uKdL1cAB5famFQx0C9YxhH8"
   private headers = { 'Authorization': this.jwtToke }
 
   private completionSubject = new Subject<boolean>();
@@ -30,8 +30,14 @@ export class DayService {
   public intervalDataDbaBird: number[] = []
   public intervalDataDbaLion: number[] = []
   GetFirstChunkDate(nodeNumber: string): Observable<boolean> {
-    const endTimestamp = Math.floor(Date.now() / 1000); // Using Math.floor to ensure an integer value
-    const startTimestamp = new Date((new Date().getTime() - (10 * 24 * 60 * 60 * 1000))).setHours(5,0,0) / 1000
+    //const endTimestamp = Math.floor(Date.now() / 1000); // Using Math.floor to ensure an integer value
+    //const startTimestamp = new Date((new Date().getTime() - (10 * 24 * 60 * 60 * 1000))).setHours(5,0,0) / 1000
+
+    const startDate = new Date('2023-10-02T00:00:00Z'); // Start of October 2nd, 2023 in UTC
+    const endDate = new Date('2023-10-02T23:59:59Z'); // End of October 2nd, 2023 in UTC
+
+    const startTimestamp = Math.floor(startDate.getTime() / 1000);
+    const endTimestamp = Math.floor(endDate.getTime() / 1000);
 
     return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
       .pipe(map(response => {
@@ -56,6 +62,8 @@ export class DayService {
     const endTimestamp = Date.now() / 1000;
     const intervalInSeconds = 4 * 60;
     const startTimestamp = endTimestamp - intervalInSeconds;
+
+  
 
     return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
       .pipe(map(response => {
