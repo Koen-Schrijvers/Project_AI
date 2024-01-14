@@ -13,11 +13,11 @@ export class DayService {
   }
 
   //need for every call
-  private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzAwNDE5NzI2LCJleHAiOjE3MDMwMTE3MjZ9.mka3hJSZZxOEruZHS2bM1n447uqfV8OKOZozXIuUyHk"
+  private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzA0NDE3MTU2LCJleHAiOjE3MDcwMDkxNTZ9.k1-RP99I_ZnzPNUUe2s3uKdL1cAB5famFQx0C9YxhH8"
   private headers = { 'Authorization': this.jwtToke }
 
   private completionSubject = new Subject<boolean>();
-
+  private month: number = 2*31*24*60*60;
   getCompletionObservable(): Observable<boolean> {
     return this.completionSubject.asObservable();
   }
@@ -29,9 +29,10 @@ export class DayService {
   public intervalDataDba: number[] = [] // maar 1 var voor beide?
   public intervalDataDbaBird: number[] = []
   public intervalDataDbaLion: number[] = []
+
   GetFirstChunkDate(nodeNumber: string): Observable<boolean> {
-    const endTimestamp = Math.floor(Date.now() / 1000); // Using Math.floor to ensure an integer value
-    const startTimestamp = new Date((new Date().getTime() - (10 * 24 * 60 * 60 * 1000))).setHours(5,0,0) / 1000
+    const endTimestamp = (Math.floor(Date.now() / 1000))- this.month; // Using Math.floor to ensure an integer value
+    const startTimestamp = (new Date((new Date().getTime() - (10 * 24 * 60 * 60 * 1000))).setHours(5,0,0) / 1000) - this.month
 
     return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
       .pipe(map(response => {
@@ -53,7 +54,7 @@ export class DayService {
   }
 
   GetLiveData(nodeNumber: string): Observable<boolean> {
-    const endTimestamp = Date.now() / 1000;
+    const endTimestamp = (Date.now() / 1000) - this.month;
     const intervalInSeconds = 4 * 60;
     const startTimestamp = endTimestamp - intervalInSeconds;
 

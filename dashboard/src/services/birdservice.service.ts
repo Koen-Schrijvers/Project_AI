@@ -13,9 +13,9 @@ export class BirdserviceService {
   }
 
   //need for every call
-  private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzAwNDE5NzI2LCJleHAiOjE3MDMwMTE3MjZ9.mka3hJSZZxOEruZHS2bM1n447uqfV8OKOZozXIuUyHk"
+  private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzA0NDE3MTU2LCJleHAiOjE3MDcwMDkxNTZ9.k1-RP99I_ZnzPNUUe2s3uKdL1cAB5famFQx0C9YxhH8"
   private headers = { 'Authorization': this.jwtToke }
-
+  private month: number = 2*31*24*60*60;
   private completionSubject = new Subject<boolean>();
 
   getCompletionObservable(): Observable<boolean> {
@@ -49,8 +49,11 @@ export class BirdserviceService {
   public intervalDataDba: number[] = []
 
   GetWeekData(nodeNumber: string) {
-    let endTimestamp = Date.now() / 1000;
-    let startTimestamp = endTimestamp - (24 * 60 * 60);
+    let endTimestamp = (Date.now() / 1000) - this.month;
+    let startTimestamp = (endTimestamp - (24 * 60 * 60));
+    console.log("Bird")
+    console.log(endTimestamp)
+    console.log(startTimestamp)
     const amountDays = 7
     const observ = []
     for (let index = 0; index < amountDays; index++) {
