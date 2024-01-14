@@ -41,7 +41,7 @@ export class AsasenseService {
   }
 
   GetLastMinuteByNode(node: string): Observable<any> {
-    const lastMinute = ((new Date().getTime() - (10 * 24 * 60 * 60 * 1000)) / 1000)-this.month
+    const lastMinute = ((new Date().getTime()) / 1000)-this.month
     const minuteBefore = lastMinute - 120
     
     try{
@@ -52,7 +52,7 @@ export class AsasenseService {
     }
   }
   GetLastMinute(): Observable<any> {
-    const lastMinute = (new Date(new Date().getTime() - (10 * 24 * 60 * 60 * 1000)).getTime()) / 1000;
+    const lastMinute = (new Date(new Date().getTime()).getTime()) / 1000;
     const minuteBefore = lastMinute - 120
     
     try{
