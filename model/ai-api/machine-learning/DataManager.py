@@ -15,10 +15,10 @@ class DataManager:
             shutil.copyfile(src=self.original_dir/ category / fname, dst=dir / fname)
 
     def make_preset_subsets(self):
-        for category in ("Lion", "Bird", "noLion", "noBird"):
-            self.make_subset_per_category("Train", category ,start_index=0, end_index=20) 
-            self.make_subset_per_category("Validation", category, start_index=20, end_index=30) 
-            self.make_subset_per_category("Test", category, start_index=30, end_index=40)
+        for category in ("Lion", "noLion"):
+            self.make_subset_per_category("Train", category ,start_index=0, end_index=400) 
+            self.make_subset_per_category("Validation", category, start_index=400, end_index=550) 
+            self.make_subset_per_category("Test", category, start_index=550, end_index=678)
  
 
     def get_train_data(self,model_type):

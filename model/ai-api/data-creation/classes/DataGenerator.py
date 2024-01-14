@@ -7,10 +7,10 @@ from classes.SpectroGenerator import SpectroGenerator
 import shutil
 
 class DataGenerator:
-    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzAwNDE5NzI2LCJleHAiOjE3MDMwMTE3MjZ9.mka3hJSZZxOEruZHS2bM1n447uqfV8OKOZozXIuUyHk"
+    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzA0NDE3MTU2LCJleHAiOjE3MDcwMDkxNTZ9.k1-RP99I_ZnzPNUUe2s3uKdL1cAB5famFQx0C9YxhH8"
     headers = {'Authorization': f'Bearer {token}'}
     categories = ("Lion", "Bird", "noBird","noLion")
-    def __init__(self, targetDir = "../data/unsorted", figSize = (5,5), window_time = 10, step_size = 1) -> None:
+    def __init__(self, targetDir = "../data/unsorted", figSize = (5,5), window_time = 10, step_size = 4) -> None:
         self.targetDir = targetDir
         self.figure_size = figSize
         self.window_time = window_time
