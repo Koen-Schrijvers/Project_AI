@@ -12,7 +12,7 @@ export class AsasenseService {
     
   }
 
-  private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzAwNDE5NzI2LCJleHAiOjE3MDMwMTE3MjZ9.mka3hJSZZxOEruZHS2bM1n447uqfV8OKOZozXIuUyHk"
+  private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzA0NDE3MTU2LCJleHAiOjE3MDcwMDkxNTZ9.k1-RP99I_ZnzPNUUe2s3uKdL1cAB5famFQx0C9YxhH8"
   private headers = { 'Authorization': this.jwtToke }
   private meanDay: number = 0;
   private dayDataDba: number[] = []
@@ -24,6 +24,7 @@ export class AsasenseService {
 
   private currentDate: Date = new Date(new Date().getTime() - (10 * 24 * 60 * 60 * 1000));
 
+  private month: number = 105*24*60*60
 
 
   GetDataWithUnixTime(unixStartTime: string = this.unixStartTest, unixEndTime: string = this.unixEndTest) {
@@ -38,7 +39,7 @@ export class AsasenseService {
   }
 
   GetLastMinuteByNode(node: string): Observable<any> {
-    const lastMinute = (new Date().getTime() - (10 * 24 * 60 * 60 * 1000)) / 1000
+    const lastMinute = (new Date().getTime() / 1000) - this.month;
     const minuteBefore = lastMinute - 120
     
     try{

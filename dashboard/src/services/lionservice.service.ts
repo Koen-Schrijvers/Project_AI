@@ -13,7 +13,7 @@ export class LionserviceService {
   }
 
   //need for every call
-  private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzAwNDE5NzI2LCJleHAiOjE3MDMwMTE3MjZ9.mka3hJSZZxOEruZHS2bM1n447uqfV8OKOZozXIuUyHk"
+  private jwtToke: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTgsInJvbGUiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNzA0NDE3MTU2LCJleHAiOjE3MDcwMDkxNTZ9.k1-RP99I_ZnzPNUUe2s3uKdL1cAB5famFQx0C9YxhH8"
   private headers = { 'Authorization': this.jwtToke }
   
   private completionSubject = new Subject<boolean>();
@@ -105,10 +105,10 @@ export class LionserviceService {
     return sum / data.length;
   }
 
-
+  private month = 105 * 24 * 60 * 60;
   GetWeekData(nodeNumber: string) {
-    let endTimestamp = (Date.now() - (10 * 24 * 60 * 60 * 1000)) / 1000;
-    let startTimestamp = endTimestamp - (24 * 60 * 60) - (10 * 24 * 60 * 60 * 1000);
+    let endTimestamp = (Date.now() / 1000) - this.month;
+    let startTimestamp = endTimestamp - (24 * 60 * 60)
     const amountDays = 7
     const observ = []
     for (let index = 0; index < amountDays; index++) {

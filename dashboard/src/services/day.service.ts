@@ -18,6 +18,8 @@ export class DayService {
 
   private completionSubject = new Subject<boolean>();
 
+  private month : number = 105 * 24 * 60 * 60
+
   getCompletionObservable(): Observable<boolean> {
     return this.completionSubject.asObservable();
   }
@@ -40,8 +42,9 @@ export class DayService {
     const startDate = new Date('2023-10-02T00:00:00Z'); // Start of October 2nd, 2023 in UTC
     const endDate = new Date('2023-10-02T23:59:59Z'); // End of October 2nd, 2023 in UTC
 
-    const startTimestamp = Math.floor(startDate.getTime() / 1000);
-    const endTimestamp = Math.floor(endDate.getTime() / 1000);
+    const endTimestamp = (Math.floor(endDate.getTime() / 1000)) //-this.month;
+    const startTimestamp = (startDate.setHours(0,0,0) / 1000)//- this.month;
+
 
     return this.httpClient.get<dataObject>(`https://api-new.asasense.com/ambient/node/${nodeNumber}/measurements/${startTimestamp}i/${endTimestamp}`, { headers: this.headers })
       .pipe(map(response => {
