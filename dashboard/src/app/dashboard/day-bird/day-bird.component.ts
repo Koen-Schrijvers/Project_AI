@@ -16,7 +16,7 @@ export class DayBirdComponent implements OnInit {
   constructor(private service: DayService) { }
 
   ngOnInit(): void {
-    this.service.GetFirstChunkDate("17").subscribe((success: boolean) => {
+    /*this.service.GetFirstChunkDate("17").subscribe((success: boolean) => {
       if (success) {
         this.createChart();
 
@@ -30,7 +30,7 @@ export class DayBirdComponent implements OnInit {
           })
         },this.updateInterval)
       }
-    });
+    });*/
   }
 
   createChart() {

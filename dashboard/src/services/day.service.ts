@@ -24,11 +24,15 @@ export class DayService {
 
   public intervalDataTime: number[] = []
   public unixTimeStamp: string[] = []
+  
   public unixTimeStampLion: string[] = []
   public unixTimeStampBird: string[] = []
+
   public intervalDataDba: number[] = [] // maar 1 var voor beide?
+
   public intervalDataDbaBird: number[] = []
   public intervalDataDbaLion: number[] = []
+
   GetFirstChunkDate(nodeNumber: string): Observable<boolean> {
     //const endTimestamp = Math.floor(Date.now() / 1000); // Using Math.floor to ensure an integer value
     //const startTimestamp = new Date((new Date().getTime() - (10 * 24 * 60 * 60 * 1000))).setHours(5,0,0) / 1000
@@ -92,6 +96,27 @@ export class DayService {
 
     const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 
+    return formattedTime;
+  }
+  unixTimestampToTimeString(unixTimestamp: string): string {
+    // Parse the input string to a number
+    const timestampNumber = parseFloat(unixTimestamp);
+    
+    // Check if parsing was successful
+    if (isNaN(timestampNumber)) {
+      return 'Invalid Timestamp';
+    }
+  
+    // Convert the timestamp to milliseconds
+    const milliseconds = timestampNumber * 1000;
+  
+    const date = new Date(milliseconds);
+  
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+  
+    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+  
     return formattedTime;
   }
 }
